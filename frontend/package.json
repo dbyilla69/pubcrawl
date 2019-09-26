@@ -1,49 +1,12 @@
 {
-  "name": "pubcrawler",
-  "version": "0.1.0",
-  "private": true,
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
   "dependencies": {
-    "@apollo/react-hooks": "^3.1.1",
-    "@apollo/react-testing": "^3.1.1",
-    "apollo-boost": "^0.4.4",
-    "apollo-cache-inmemory": "^1.6.3",
-    "apollo-cache-persist": "^0.1.1",
-    "bootstrap": "^4.3.1",
-    "graphql": "^14.5.6",
+    "apollo-client": "^2.6.4",
     "graphql-tag": "^2.10.1",
-    "lodash.debounce": "^4.0.8",
-    "node-sass": "^4.12.0",
-    "react": "^16.9.0",
-    "react-apollo": "^3.1.1",
-    "react-bootstrap": "^1.0.0-beta.12",
-    "react-dom": "^16.9.0",
-    "react-router-bootstrap": "^0.25.0",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1",
-    "styled-components": "^4.3.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "babel-plugin-graphql-tag": "^2.5.0"
+    "next": "^9.0.6",
+    "styled-components": "^4.4.0"
   }
 }
