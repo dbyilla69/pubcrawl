@@ -1,0 +1,44 @@
+.publishers-header {
+    background: #000;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px 2px 0px #adb5bd;
+}
+
+.publisher-header-item {
+    display: inline-block;
+    font-weight: 400;
+    padding: 2px 5px;
+    text-align: left;
+    color: #fff;
+}
+
+.publishers-header-id {
+    width: 15%;
+}
+
+.publishers-header-description {
+    width: 50%;
+}
+
+.publishers-header-name {
+    width: 35%;
+}
+
+.results {
+    position: relative;
+    animation: animatetop .7s;
+    z-index: 1;
+    transition-timing-function: linear;
+  }
+  
+  @keyframes animatetop {
+      from {
+          bottom: -400px;
+          opacity:0
+      } 
+      to {
+          top:0;
+          opacity:1
+      }
+  }

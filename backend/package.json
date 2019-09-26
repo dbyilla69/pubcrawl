@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --inspect index.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.9.3",
+    "dataloader": "^1.4.0",
+    "dotenv": "^8.1.0",
+    "graphql-import": "^0.7.1",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}

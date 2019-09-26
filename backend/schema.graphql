@@ -1,0 +1,108 @@
+type Query {
+	allPublishers(id: ID, name: String, description: String): [Publisher]!
+	allVideos(
+		publisher_id: Int!
+		publisher_name: String!
+		page: Int
+		order: OrderType
+		recommendable_filter: RecommendableFilter
+	): AllVideosType
+	videoWhereId(
+		video_id: String!
+		publisher_id: Int!
+		publisher_name: String!
+	): Video
+	videosWhereUrl(
+		video_url: String!
+		publisher_id: Int!
+		publisher_name: String!
+	): [Video]
+}
+
+scalar DateTime
+
+type Video {
+	publisher: String
+	id: ID!
+	publisher_id: ID!
+	pub_video_id: String
+	uploader: String
+	title: String
+	description: String
+	url: String
+	thumbnail_url: String
+	publish_date: DateTime
+	is_recommendable: Boolean
+	is_manual_recommendable: Boolean
+	external_data: String
+	item_type: String
+	has_expired: Boolean
+	was_crawled: Boolean
+	update_time: DateTime
+	start_date: DateTime
+	create_time: DateTime
+	crawlerAuditData: CrawlerAuditData
+	crawlerInstructionsData: CrawlerInstructionsData
+	channelsData: [Channel]
+}
+
+type Channel {
+	id: ID!
+	publisher_id: Int
+	parent_channel: Channel
+	channel: String
+	display_ads_prob: String
+	is_reports_visible: Boolean
+}
+
+type CrawlerAuditData {
+	id: ID!
+	publisher: String
+	pub_item_id: String
+	item_type: String
+	first_successful_processing: DateTime
+	last_successful_processing: DateTime
+	last_upload: DateTime
+	error_message: String
+	nonrecommendable_reason: String
+	source: String
+	last_crawl_reason: String
+	first_nonrecommendable_time: DateTime
+}
+
+type CrawlerInstructionsData {
+	id: ID!
+	lock_id: String
+	lock_time: DateTime
+	num_strikes: Int
+	last_strike_date: DateTime
+	next_crawl: DateTime
+	next_crawl_reason: Int
+}
+
+type Publisher {
+	id: ID!
+	name: String
+	description: String
+}
+
+type PageInfo {
+	hasNextPage: Boolean!
+	totalPages: Int!
+}
+
+type AllVideosType {
+	pageInfo: PageInfo!
+	edges: [Video]!
+}
+
+enum OrderType {
+	DESC
+	ASC
+}
+
+enum RecommendableFilter {
+	RECOMMENDABLE
+	NON_RECOMMENDABLE
+	BOTH
+}

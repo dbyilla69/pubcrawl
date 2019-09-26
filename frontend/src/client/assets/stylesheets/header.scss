@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo&display=swap');
+
+.h1, h1 {
+    margin-bottom: 0 !important;
+    line-height: .8 !important;
+}
+
+.pub-crawler {
+    font-family: 'Arvo', serif;
+    margin: 15px 0 10px;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: -5px;
+    color: #bebebe;
+    -webkit-text-fill-color: #78b4f4;
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: black;
+    font-size: 5rem;
+    text-shadow: 0.5px 0.5px #007bff;
+}
+
+.person-needs-oc-data {
+    max-width: 3rem;
+    vertical-align: unset;
+    margin: 0 10px 0 14px;
+    position: relative;
+    animation: animateperson infinite 100s linear;
+    z-index: 1;
+}
+
+  @keyframes animateperson {
+    from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+  }
+
+
+.by-taboola {
+    text-align: right;
+    font-size: 13px !important;
+    text-shadow: initial;
+    -webkit-text-fill-color: initial;
+    -webkit-text-stroke-width: initial;
+    letter-spacing: initial;
+    color: initial;
+    -webkit-text-stroke-color: initial;
+    font-family: helvetica, sans-serif;
+    font-weight: 500;
+}
+
+.taboola-word {
+    font-weight: 700;
+    font-style: italic;
+}
