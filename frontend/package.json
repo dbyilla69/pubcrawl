@@ -11,20 +11,18 @@
 		"test-win": "SET NODE_ENV=test && jest --watch"
 	},
 	"dependencies": {
+		"apollo-boost": "^0.4.4",
 		"apollo-client": "^2.6.4",
+		"graphql": "^14.5.8",
 		"graphql-tag": "^2.10.1",
 		"next": "^9.0.6",
+		"next-with-apollo": "^4.3.0",
 		"react": "^16.9.0",
 		"react-apollo": "^3.1.1",
 		"react-dom": "^16.9.0",
 		"styled-components": "^4.4.0"
 	},
 	"devDependencies": {
-		"eslint": "^6.4.0",
-		"eslint-config-airbnb": "^18.0.1",
-		"eslint-plugin-import": "^2.18.2",
-		"eslint-plugin-jsx-a11y": "^6.2.3",
-		"eslint-plugin-react": "^7.14.3",
 		"graphql-tools": "^4.0.5"
 	},
 	"babel": {
