@@ -3,7 +3,15 @@ import ApolloClient from 'apollo-boost'
 
 function createClient({ headers }) {
 	return new ApolloClient({
-		uri: process.env.BACKEND_URL,
+		uri: 'http://localhost:4000',
+		// request: operation => {
+		// 	operation.setContext({
+		// 		fetchOptions: {
+		// 			credentials: 'include',
+		// 		},
+		// 		headers,
+		// 	})
+		// },
 		clientState: {
 			resolvers: {
 				Mutation: {
