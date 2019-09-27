@@ -14,5 +14,8 @@
 		"statusBar.foreground": "#15202b"
 	},
 	"peacock.color": "#00b3e6",
-	"prettier.semi": false
+	"prettier.semi": false,
+	"prettier.useTabs": true,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true
 }
