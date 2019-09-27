@@ -35,6 +35,17 @@ module.exports = {
 			return error
 		}
 	},
+
+	publisherWhereId: async (parent, args, ctx, info) => {
+		try {
+			const [publisher] = await ctx.db.query(`SELECT id, name, description FROM trc.publishers WHERE id = ?`, [args.id])
+
+			return publisher
+		} catch (error) {
+			return error
+		}
+	},
+
 	allVideos: async (parent, args, ctx, info) => {
 		try {
 			if (!ctx.videoLoader) {

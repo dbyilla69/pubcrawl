@@ -7,6 +7,7 @@ function Cache() {
     this.auditData = {}
     this.instructionsData = {}
     this.channelsData = {}
+    this.publishers = {}
 }
 
 Cache.makeUniqueKey = function(args) {

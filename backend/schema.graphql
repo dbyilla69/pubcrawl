@@ -1,5 +1,6 @@
 type Query {
 	allPublishers(id: ID, name: String, description: String): [Publisher]!
+	publisherWhereId(id: ID): Publisher
 	allVideos(
 		publisher_id: Int!
 		publisher_name: String!
