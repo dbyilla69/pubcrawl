@@ -6,7 +6,7 @@ export default () => (
 			<span>Pub</span>
 			<Sign
 				src="http://cdn.taboola.com/static/impl/png/pubcrawl-transparent.png"
-				alt="pubcrawl-logo"
+				alt="pub crawler logo"
 			/>
 			<span>Crawler</span>
 		</LogoSpan>

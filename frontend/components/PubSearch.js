@@ -62,16 +62,24 @@ export default props => {
 }
 
 const Form = styled.form`
+    max-width: 800px;
+    margin: 0 auto;
 	fieldset {
+        padding: 10px;
 		display: grid;
 		grid-template-rows: 1fr 1fr;
 	}
+
+    label[for="search"] {
+        grid-row-start: 2;
+    }
 `
 
 const SearchType = styled.div`
 	text-align: center;
 	margin: 0 10px 20px;
-    
+    grid-row-start: 1;
+
     span {
         font-weight: bold;
     }
@@ -92,19 +100,21 @@ const SearchType = styled.div`
 `
 
 const TextInput = styled.input`
-	width: calc(100% - 30px);
+	width: calc(100% - 55px + 1rem);
 	font-size: 2rem;
-
+    line-height: 2;
     border: 2px solid black;
     border-radius: 5px;
+    padding: 0 10px;
 `
 
 const BeerMug = styled.div`
+    float: right;
+    margin: 1rem;
 	background-image: url('//cdn.taboola.com/static/impl/png/beer-mug-transparent.png');
 	height: 25px;
 	width: 25px;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-    float: right;
 `

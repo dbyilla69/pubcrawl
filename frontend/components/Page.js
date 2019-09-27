@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Header from '../components/Header'
 
+export default props => (
+    <ThemeProvider theme={theme}>
+        <GlobalStyle/>
+        <StyledPage>
+            <Header />
+            <Inner>{props.children}</Inner>
+        </StyledPage>
+    </ThemeProvider>
+);
+    
+
 const theme = {
     blue: '#00b3e6',
     black: '#393939',
@@ -45,19 +56,3 @@ const GlobalStyle = createGlobalStyle`
         color: ${theme.black};
     }
 `;
-
-class Page extends Component {
-    render() {
-        return (
-            <ThemeProvider theme={theme}>
-                <GlobalStyle/>
-                <StyledPage>
-                    <Header />
-                    <Inner>{this.props.children}</Inner>
-                </StyledPage>
-            </ThemeProvider>
-        );
-    }
-}
-
-export default Page;

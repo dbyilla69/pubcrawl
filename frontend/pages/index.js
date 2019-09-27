@@ -44,12 +44,8 @@ export default () => {
 					/>
 					{loading && (
 						<p className="loading-img-container">
-							<img
-								className="loading-img"
-								alt="pubcrawl-logo"
-								src="http://cdn.taboola.com/static/impl/png/pubcrawl-transparent-2.png"
-							/>
-						</p>
+                            loading...
+                        </p>
 					)}
 					{!loading && console.log(pubs)}
 				</>
