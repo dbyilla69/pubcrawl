@@ -46,6 +46,16 @@ module.exports = {
 		}
 	},
 
+	publisherConfig: async (parent, args, ctx, info) => {
+		try {
+			const config = await ctx.db.query(`SELECT * FROM trc.publisher_config WHERE publisher_id = ?`, [args.id])
+
+			return config
+		} catch (error) {
+			return error
+		}
+	},
+
 	allVideos: async (parent, args, ctx, info) => {
 		try {
 			if (!ctx.videoLoader) {

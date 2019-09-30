@@ -1,6 +1,7 @@
 type Query {
 	allPublishers(id: ID, name: String, description: String): [Publisher]!
 	publisherWhereId(id: ID): Publisher
+	publisherConfig(id: ID): [PublisherConfig]!
 	allVideos(
 		publisher_id: Int!
 		publisher_name: String!
@@ -79,6 +80,15 @@ type CrawlerInstructionsData {
 	last_strike_date: DateTime
 	next_crawl: DateTime
 	next_crawl_reason: Int
+}
+
+type PublisherConfig {
+	id: ID!
+	publisher_id: ID!
+	attribute: String
+	value: String
+	performer: String
+	update_time: DateTime
 }
 
 type Publisher {
