@@ -2,8 +2,12 @@ import styled from 'styled-components'
 import Link from 'next/link'
 
 export default () => (
-	<header  style={{ textAlign: 'center' }}>
-		<BackToSearch><Link href="/"><a>Search Publishers</a></Link></BackToSearch>
+	<header style={{ textAlign: 'center' }}>
+		<BackToSearch>
+			<Link href="/">
+				<a>Search Publishers</a>
+			</Link>
+		</BackToSearch>
 		<LogoSpan>
 			<span>Pub</span>
 			<Sign
@@ -17,7 +21,7 @@ export default () => (
 
 const BackToSearch = styled.div`
 	text-align: left;
-	margin: 20px;
+	margin: 20px 0 0 20px;
 `
 
 const LogoSpan = styled.span`

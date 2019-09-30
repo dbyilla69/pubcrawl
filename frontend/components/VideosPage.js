@@ -34,22 +34,22 @@ export default props => {
 		}
 	}
 
-	return (	
+	return (
 		<Layout>
-			{statusSwitch()}
 			<Filters
 				filters={filters}
 				setFilters={setFilters}
 				setRecommendableFilter={setRecommendableFilter}
 				recommendableFilter={recommendableFilter}
 			/>
+			{statusSwitch()}
 		</Layout>
 	)
 }
 
 const Layout = styled.main`
 	display: grid;
-	grid-template-columns: 4fr 1fr;
+	grid-template-columns: 1fr 4fr;
 	grid-column-gap: 50px;
 `
 

@@ -63,7 +63,6 @@ export default ({
 				<h2>Recommendable?</h2>
 				<fieldset>
 					<label htmlFor="BOTH">
-						Both{' '}
 						<input
 							type="radio"
 							onChange={handleRecChange}
@@ -71,10 +70,10 @@ export default ({
 							id="BOTH"
 							value="BOTH"
 							checked={Boolean(recommendableFilter === 'BOTH')}
-						/>
+						/>{' '}
+						Both
 					</label>
 					<label htmlFor="NON_RECOMMENDABLE">
-						Non Recommendable{' '}
 						<input
 							type="radio"
 							onChange={handleRecChange}
@@ -82,10 +81,10 @@ export default ({
 							id="NON_RECOMMENDABLE"
 							value="NON_RECOMMENDABLE"
 							checked={Boolean(recommendableFilter === 'NON_RECOMMENDABLE')}
-						/>
+						/>{' '}
+						Non Recommendable
 					</label>
 					<label htmlFor="RECOMMENDABLE">
-						Recommendable{' '}
 						<input
 							type="radio"
 							onChange={handleRecChange}
@@ -93,7 +92,8 @@ export default ({
 							id="RECOMMENDABLE"
 							value="RECOMMENDABLE"
 							checked={Boolean(recommendableFilter === 'RECOMMENDABLE')}
-						/>
+						/>{' '}
+						Recommendable
 					</label>
 				</fieldset>
 				<FilterHeader
@@ -138,36 +138,34 @@ export default ({
 				</FieldSetStyles>
 			</Form>
 		</Container>
-		
 	)
 }
 
 const createCheckBox = (filter, filters, onChange) => (
 	<label key={filter} htmlFor={filter}>
-		{filter}{' '}
 		<input
 			type="checkbox"
 			checked={filters[filter]}
 			name={filter}
 			id={filter}
 			onChange={e => onChange({ ...filters, [filter]: !filters[filter] })}
-		/>
+		/>{' '}
+		{filter}
 	</label>
 )
 
 const Container = styled.div`
-	border-left: 3px solid ${props => props.theme.blue};
-	padding-left: 20px;
-	text-align: right;
+	border-right: 3px solid ${props => props.theme.blue};
+	padding-right: 20px;
 	h1 {
 		margin-bottom: 0;
-		color: ${props => props.theme.blue}
+		color: ${props => props.theme.blue};
 	}
 `
 const Form = styled.form`
 	position: sticky;
 	top: -173px;
-	
+
 	fieldset {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -175,7 +173,6 @@ const Form = styled.form`
 `
 
 const FilterHeader = styled.h2`
-	text-align: right;
 	margin: 5px 0;
 	&:hover {
 		cursor: pointer;
