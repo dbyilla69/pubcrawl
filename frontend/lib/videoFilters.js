@@ -43,7 +43,6 @@ export const defaultFilters = {
 	create_time: false,
 	crawlerAuditData: {
 		id: false,
-		publisher: false,
 		pub_item_id: false,
 		item_type: false,
 		first_successful_processing: false,
@@ -66,7 +65,6 @@ export const defaultFilters = {
 	},
 	channelsData: {
 		id: false,
-		publisher_id: false,
 		parent_channel: false,
 		channel: false,
 		display_ads_prob: false,

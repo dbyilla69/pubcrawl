@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export default props => {
 	const { searchType, setSearchType, onChange, client } = props
 	return (
-		<Form>
+		<Form onSubmit={e => e.preventDefault()}>
 			<fieldset>
 				<SearchType>
 					<span>SEARCH BY:</span>

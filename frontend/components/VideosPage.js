@@ -9,33 +9,48 @@ import { defaultFilters, applyFilters } from '../lib/videoFilters'
 
 export default props => {
 	const [filters, setFilters] = useState(defaultFilters)
+	const [recommendableFilter, setRecommendableFilter] = useState('BOTH')
+
 	const { id, name } = props.publisher
 	const { data, error, loading } = useQuery(ALL_VIDEOS_QUERY, {
 		variables: {
 			publisher_id: parseInt(id, 10),
 			publisher_name: name,
-			recommendable_filter: 'BOTH',
+			recommendable_filter: recommendableFilter,
 		},
 	})
 
-	if (loading) return <div>loading videos...</div>
-	if (error) return <Error error={error} />
+	const statusSwitch = () => {
+		switch (true) {
+			case loading:
+				return <div>loading videos...</div>
+			case error:
+				return <Error error={error} />
+			default:
+				const mappedVideoData = data.allVideos.edges.map(video =>
+					applyFilters({ video, filters })
+				)
+				return <Videos videos={mappedVideoData} />
+		}
+	}
 
-	const mappedVideoData = data.allVideos.edges.map(video =>
-		applyFilters({ video, filters })
-	)
-
-	return (
+	return (	
 		<Layout>
-			<Videos videos={mappedVideoData} />
-			<Filters filters={filters} setFilters={setFilters} />
+			{statusSwitch()}
+			<Filters
+				filters={filters}
+				setFilters={setFilters}
+				setRecommendableFilter={setRecommendableFilter}
+				recommendableFilter={recommendableFilter}
+			/>
 		</Layout>
 	)
 }
 
 const Layout = styled.main`
 	display: grid;
-	grid-template-columns: 3fr 1fr;
+	grid-template-columns: 4fr 1fr;
+	grid-column-gap: 50px;
 `
 
 export const ALL_VIDEOS_QUERY = gql`

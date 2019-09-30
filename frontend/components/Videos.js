@@ -5,7 +5,7 @@ export default props => {
 	const makeCell = ({ key, value }) => {
 		return (
 			<div key={`${key}:${value}${Math.floor(Math.random() * 100)}`}>
-				{key}: {value}
+				{key}: {value ? value.toString() : '(null)'}
 			</div>
 		)
 	}
@@ -23,6 +23,7 @@ export default props => {
 			})}
 		</VideoGrid>
 	))
+
 	return <div>{mappedVids}</div>
 }
 
