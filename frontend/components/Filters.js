@@ -24,11 +24,14 @@ export default ({
 
 	const crawlerAuditCheckBoxes = Object.keys(filters.crawlerAuditData).map(
 		filter =>
-			createCheckBox('crawler-audit')(filter, filters.crawlerAuditData, crawlerAuditData =>
-				setFilters({
-					...filters,
-					crawlerAuditData,
-				})
+			createCheckBox('crawler-audit')(
+				filter,
+				filters.crawlerAuditData,
+				crawlerAuditData =>
+					setFilters({
+						...filters,
+						crawlerAuditData,
+					})
 			)
 	)
 
@@ -141,9 +144,7 @@ export default ({
 	)
 }
 
-const createCheckBox = layer => (filter, filters, onChange) => 
-	
-	(
+const createCheckBox = layer => (filter, filters, onChange) => (
 	<label key={filter} htmlFor={`${layer}-${filter}`}>
 		<input
 			type="checkbox"
