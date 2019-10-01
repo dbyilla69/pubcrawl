@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Main, NextScript, Head } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
 // This is allowing styled-components to work on the server side.

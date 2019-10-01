@@ -1,14 +1,12 @@
-import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Error from '../../../components/Error'
 import VideosPage from '../../../components/VideosPage'
 
 export default props => {
-	const router = useRouter()
-	const { id } = router.query
+	const { id } = props.query
 	const { loading, error, data } = useQuery(CURRENT_PUBLISHER_QUERY, {
-		variables: { id },
+		variables: { id }
 	})
 
 	if (loading) return <div>loading publisher...</div>

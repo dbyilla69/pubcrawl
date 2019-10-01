@@ -1,46 +1,73 @@
-export const applyFilters = ({ video, filters }) => {
-	// iterate over each filter
-	return Object.entries(filters).reduce((videoData, [property, active]) => {
-		// if it's a property with nested fields, iterate over the nested fields
-		if (nestedProperties.includes(property)) {
-			Object.entries(filters[property]).forEach(([nestedProp, nestedActive]) => {
-				// add those properties to the filtered videoData object
-				videoData[property] = videoData[property] || {}
-				if (nestedActive) videoData[property][nestedProp] = video[property][nestedProp]
-			})
-			return videoData
-		}
-
-		// if it's not nested, just add the top level prop
-		if (active) videoData[property] = video[property]
+// ? 1. takes in the overall data object from which it is filtering
+// ? 2. take in the level at which it is filtering (ex. 'crawlerAuditData')
+// ? 3. iterates over the filters entries and creates a new object with only the desired data
+const makeVideoReducer = data => level => (videoData, [property, active]) => {
+	if (level) {
+		if (active) videoData[property] = data[level][property]
 		return videoData
-	}, {})
+	}
+
+	if (active) videoData[property] = data[property]
+	return videoData
 }
 
-export const nestedProperties = [
-	'crawlerAuditData',
-	'crawlerInstructionsData',
-	'channelsData',
-]
+export const applyFilters = ({ video, filters }) => {
+	// extract each section of the filters
+	const trcVideosFilters = { ...filters.trcVideosData }
+	const crawlerAuditFilters = { ...filters.crawlerAuditData }
+	const crawlerInstructionsFilters = { ...filters.crawlerInstructionsData }
+	const channelsFilters = { ...filters.channelsData }
+
+	const trcVideosData = Object.entries(trcVideosFilters).reduce(
+		makeVideoReducer(video)(),
+		{}
+	)
+	const crawlerAuditData = Object.entries(crawlerAuditFilters).reduce(
+		makeVideoReducer(video)('crawlerAuditData'),
+		{}
+	)
+	const crawlerInstructionsData = Object.entries(
+		crawlerInstructionsFilters
+	).reduce(makeVideoReducer(video)('crawlerInstructionsData'), {})
+
+	const channelsData = video.channelsData.map(videoChannel =>
+		Object.entries(channelsFilters).reduce(makeVideoReducer(videoChannel)(), {})
+	)
+
+	const filteredVideo = {
+		...trcVideosData,
+		crawlerAuditData: {
+			...crawlerAuditData,
+		},
+		crawlerInstructionsData: { ...crawlerInstructionsData },
+		channelsData: [...channelsData],
+	}
+
+	return filteredVideo
+}
+
+export const nestedProperties = ['crawlerAuditData', 'crawlerInstructionsData']
 
 export const defaultFilters = {
-	id: true,
-	pub_video_id: false,
-	uploader: false,
-	title: true,
-	description: true,
-	url: true,
-	thumbnail_url: true,
-	publish_date: true,
-	is_recommendable: true,
-	is_manual_recommendable: false,
-	external_data: false,
-	item_type: false,
-	has_expired: false,
-	was_crawled: false,
-	update_time: false,
-	start_date: false,
-	create_time: false,
+	trcVideosData: {
+		id: true,
+		pub_video_id: false,
+		uploader: false,
+		title: true,
+		description: false,
+		url: true,
+		thumbnail_url: false,
+		publish_date: false,
+		is_recommendable: true,
+		is_manual_recommendable: false,
+		external_data: false,
+		item_type: false,
+		has_expired: false,
+		was_crawled: false,
+		update_time: false,
+		start_date: false,
+		create_time: false,
+	},
 	crawlerAuditData: {
 		id: false,
 		pub_item_id: false,
@@ -66,6 +93,7 @@ export const defaultFilters = {
 	channelsData: {
 		id: false,
 		parent_channel: false,
+		parent_channel_id: false,
 		channel: false,
 		display_ads_prob: false,
 		is_reports_visible: false,

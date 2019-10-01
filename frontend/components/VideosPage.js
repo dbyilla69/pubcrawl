@@ -114,6 +114,8 @@ export const ALL_VIDEOS_QUERY = gql`
 					publisher_id
 					channel
 					display_ads_prob
+					parent_channel
+					parent_channel_id
 					is_reports_visible
 				}
 			}

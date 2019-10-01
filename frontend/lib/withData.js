@@ -1,17 +1,10 @@
 import withApollo from 'next-with-apollo'
 import ApolloClient from 'apollo-boost'
+import { CURRENT_PUBLISHER_QUERY } from '../pages/publishers/[id]/index.js'
 
 function createClient({ headers }) {
 	return new ApolloClient({
 		uri: 'http://localhost:4000',
-		// request: operation => {
-		// 	operation.setContext({
-		// 		fetchOptions: {
-		// 			credentials: 'include',
-		// 		},
-		// 		headers,
-		// 	})
-		// },
 		clientState: {
 			resolvers: {
 				Mutation: {
@@ -23,17 +16,18 @@ function createClient({ headers }) {
 							description: args.description,
 						}
 
-						ctx.cache.writeQuery({
+						ctx.client.writeQuery({
 							query: CURRENT_PUBLISHER_QUERY,
-							data: { currentPublisher: publisher },
+							data: { publisherWhereId: publisher },
 						})
+						
 						return publisher
 					},
 				},
 				Query: {
-					publisher: (parent, args, ctx, info) => {
-						const data = ctx.cache.readQuery({ query: CURRENT_PUBLISHER_QUERY })
-
+					publisherWhereId: (parent, args, ctx, info) => {
+						const data = ctx.client.readQuery({ query: CURRENT_PUBLISHER_QUERY })
+						console.log(data)
 						return data
 					},
 				},

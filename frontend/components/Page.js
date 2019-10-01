@@ -17,7 +17,7 @@ const theme = {
     blue: '#00b3e6',
     black: '#393939',
     grey: '#3A3A3A',
-    lightgrey: '#E1E1E1',
+    lightgrey: '#E9E9E9',
     offWhite: '#EDEDED',
     maxWidth: '2000px',
     bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
@@ -35,8 +35,6 @@ const Inner = styled.div`
 `;
 
 const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css?family=Arvo&display=swap');
-
     html {
         box-sizing: border-box;
         font-size: 10px;

@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 
 const SET_PUBLISHER_MUTATION = gql`
@@ -22,6 +22,7 @@ const SET_PUBLISHER_MUTATION = gql`
 export default ({ pub }) => {
 	const router = useRouter()
 	const [setPublisher] = useMutation(SET_PUBLISHER_MUTATION)
+	
 
 	return (
 		<a
@@ -34,7 +35,9 @@ export default ({ pub }) => {
 					publisher_name: pub.name,
 					description: pub.description,
 				}
-				setPublisher({ variables })
+
+				await setPublisher({ variables })
+				
 				router.push(`/publishers/${pub.id}`)
 			}}
 		>

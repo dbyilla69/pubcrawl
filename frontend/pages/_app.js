@@ -1,4 +1,5 @@
 import App from 'next/app'
+import Head from 'next/head'
 import { ApolloProvider } from 'react-apollo'
 import Page from '../components/Page'
 import withData from '../lib/withData'
@@ -20,11 +21,16 @@ class MyApp extends App {
 		const { Component, apollo, pageProps } = this.props
 
 		return (
-			<ApolloProvider client={apollo}>
-				<Page>
-					<Component {...pageProps} />
-				</Page>
-			</ApolloProvider>
+			<>
+				<Head>
+					<title>Pub Crawler</title>
+				</Head>
+				<ApolloProvider client={apollo}>
+					<Page>
+						<Component {...pageProps} />
+					</Page>
+				</ApolloProvider>
+			</>
 		)
 	}
 }

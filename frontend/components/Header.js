@@ -25,12 +25,12 @@ const BackToSearch = styled.div`
 `
 
 const LogoSpan = styled.span`
-	font-family: 'Arvo', serif;
+	font-family: serif;
 	font-size: 8rem;
 	font-weight: 700;
 	letter-spacing: -5px;
 	color: #bebebe;
-	text-shadow: 0.5px 0.5px #007bff;
+	text-shadow: 1.5px 1.5px #007bff, -1.5px 1.5px #007bff, 1.5px -1.5px #007bff, -1.5px -1.5px #007bff;
 	-webkit-text-fill-color: #78b4f4;
 	-webkit-text-stroke-width: 0.1px;
 	-webkit-text-stroke-color: black;
