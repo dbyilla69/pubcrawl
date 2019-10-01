@@ -49,9 +49,10 @@ type Video {
 }
 
 type Channel {
-	id: ID!
+	id: ID
 	publisher_id: Int
-	parent_channel: Channel
+	parent_channel: String
+	parent_channel_id: ID
 	channel: String
 	display_ads_prob: String
 	is_reports_visible: Boolean

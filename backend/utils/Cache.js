@@ -8,6 +8,7 @@ function Cache() {
     this.instructionsData = {}
     this.channelsData = {}
     this.publishers = {}
+    this.parentChannels = {}
 }
 
 Cache.makeUniqueKey = function(args) {
@@ -199,11 +200,13 @@ Cache.prototype.getChannelsData = async function(pubId, ids) {
             const placeholders = ids.map(id => '?').join()
             const channels = await db.query(
                 `
-                    SELECT trc.publisher_channels.*, trc.video_channels.* 
+                    SELECT channel.*, parent.channel as parent_channel, parent.id as parent_channel_id, trc.video_channels.* 
                     FROM trc.video_channels
-                    INNER JOIN trc.publisher_channels 
-                    ON trc.video_channels.channel_id = trc.publisher_channels.id
-                    WHERE trc.publisher_channels.publisher_id = ?
+                    INNER JOIN trc.publisher_channels as channel 
+                    ON trc.video_channels.channel_id = channel.id
+                    INNER JOIN trc.publisher_channels as parent
+                    ON channel.parent_channel = parent.id
+                    WHERE channel.publisher_id = ?
                     AND trc.video_channels.video_id IN (${placeholders})
                 `,
                 [pubId, ...ids]
