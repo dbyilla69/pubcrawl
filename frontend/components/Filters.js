@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useState } from 'react'
-import { nestedProperties } from '../lib/videoFilters'
+import Link from 'next/link'
 
 export default ({
 	filters,
@@ -61,6 +61,11 @@ export default ({
 	const handleRecChange = e => setRecommendableFilter(e.target.value)
 	return (
 		<Container>
+			<h4>
+				<Link href="/">
+					<a>Back to Search</a>
+				</Link>
+			</h4>
 			<h1>Filters</h1>
 			<Form>
 				<h2>Recommendable?</h2>
