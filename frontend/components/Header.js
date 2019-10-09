@@ -14,16 +14,10 @@ export default () => (
 )
 
 const LogoSpan = styled.span`
-	font-family: serif;
 	font-size: 8rem;
-	font-weight: 700;
-	letter-spacing: -5px;
-	color: #bebebe;
-	text-shadow: 1.5px 1.5px #007bff, -1.5px 1.5px #007bff, 1.5px -1.5px #007bff,
-		-1.5px -1.5px #007bff;
-	-webkit-text-fill-color: #78b4f4;
-	-webkit-text-stroke-width: 0.1px;
-	-webkit-text-stroke-color: black;
+	font-weight: 200;
+	letter-spacing: 5px;
+	color: ${props => props.theme.darkblue};
 `
 const Sign = styled.img`
 	max-width: 7rem;

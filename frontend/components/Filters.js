@@ -11,7 +11,7 @@ export default ({
 	recommendableFilter,
 	disabledFields,
 }) => {
-	const [recommendableActive, setRecommendableActive] = useState(true)
+	const [recommendableActive, setRecommendableActive] = useState(false)
 	const [videosActive, setVideosActive] = useState(false)
 	const [auditActive, setAuditActive] = useState(false)
 	const [instructionsActive, setInstructionsActive] = useState(false)

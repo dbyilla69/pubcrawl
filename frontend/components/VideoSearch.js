@@ -74,7 +74,7 @@ const Form = styled.form`
 	input {
 		font-size: 1.5rem;
 		line-height: 2;
-		width: calc(100% - 100px);
+		width: calc(100% - 60px);
 		padding: 5px;
 		border: 1px solid black;
 		border-radius: 5px;

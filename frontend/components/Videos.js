@@ -95,6 +95,7 @@ const VideoResult = styled.div`
 	}
 	span.key {
 		font-weight: bold;
+		padding-left: 5px;
 	}
 
 	h3 {

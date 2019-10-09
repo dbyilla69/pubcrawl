@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import Videos from './Videos'
 import Filters from './Filters'
+import Pagination from './Pagination'
 import Error from './Error'
 import Loading from './Loading'
 import { defaultFilters, applyFilters } from '../lib/videoFilters'
@@ -18,7 +19,7 @@ export default props => {
 			publisher_id: parseInt(id, 10),
 			publisher_name: name,
 			recommendable_filter: recommendableFilter,
-			page: props.page,
+			page: props.page || 1,
 		},
 	})
 
@@ -32,7 +33,13 @@ export default props => {
 				const mappedVideoData = data.allVideos.edges.map(video =>
 					applyFilters({ video, filters })
 				)
-				return <Videos videos={mappedVideoData} />
+				return (
+					<div>
+						<Pagination data={data.allVideos.pageInfo} />
+						<Videos videos={mappedVideoData} />
+						<Pagination data={data.allVideos.pageInfo} />
+					</div>
+				)
 		}
 	}
 
