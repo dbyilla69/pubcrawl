@@ -128,14 +128,18 @@ export default ({
 const Container = styled.div`
 	border-right: 3px solid ${props => props.theme.blue};
 	padding: 0 20px 10vh 0;
-	height: 80vh;
+	height: 100vh;
 	overflow: scroll;
+	position: sticky;
+
+	top: 0;
 
 	h1 {
 		margin-bottom: 0;
 		color: ${props => props.theme.blue};
 	}
 `
+
 const Form = styled.form`
 	fieldset {
 		display: grid;
