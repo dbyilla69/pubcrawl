@@ -119,6 +119,9 @@ const LoadingStyles = styled.div`
 		50% {
 			stroke: ${props => props.theme.yellow};
 		}
+		100% {
+			stroke: ${props => props.theme.lightblue};
+		}
 	}
 	@keyframes color {
 		0% {
@@ -126,6 +129,9 @@ const LoadingStyles = styled.div`
 		}
 		50% {
 			stroke: ${props => props.theme.yellow};
+		}
+		100% {
+			stroke: ${props => props.theme.lightblue};
 		}
 	}
 `

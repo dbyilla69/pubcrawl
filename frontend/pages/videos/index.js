@@ -1,4 +1,4 @@
-import VideosPage from '../components/VideosPage'
+import VideosPage from '../../components/AllVideosPage'
 
 export default props => {
 	const { name, id, page } = props.query
