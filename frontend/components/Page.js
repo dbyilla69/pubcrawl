@@ -15,6 +15,9 @@ export default props => (
 
 const theme = {
     blue: '#00b3e6',
+    lightblue: '#96c6f9',
+    darkblue: '#007bff',
+    yellow: '#ffcc74',
     black: '#393939',
     grey: '#3A3A3A',
     lightgrey: '#E9E9E9',

@@ -1,7 +1,7 @@
 import VideosPage from '../components/VideosPage'
 
 export default props => {
-	const { name, id } = props.query
+	const { name, id, page } = props.query
 
-	return <VideosPage publisher={{ name, id }} />
+	return <VideosPage publisher={{ name, id }} page={page} />
 }

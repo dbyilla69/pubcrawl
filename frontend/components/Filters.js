@@ -8,6 +8,7 @@ export default ({
 	setRecommendableFilter,
 	recommendableFilter,
 }) => {
+	const [recommendableActive, setRecommendableActive] = useState(true)
 	const [videosActive, setVideosActive] = useState(false)
 	const [auditActive, setAuditActive] = useState(false)
 	const [instructionsActive, setInstructionsActive] = useState(false)
@@ -61,90 +62,102 @@ export default ({
 	const handleRecChange = e => setRecommendableFilter(e.target.value)
 	return (
 		<Container>
-			<h4>
-				<Link href="/">
-					<a>Back to Search</a>
-				</Link>
-			</h4>
-			<h1>Filters</h1>
-			<Form>
-				<h2>Recommendable?</h2>
-				<fieldset>
-					<label htmlFor="BOTH">
-						<input
-							type="radio"
-							onChange={handleRecChange}
-							name="recommendable"
-							id="BOTH"
-							value="BOTH"
-							checked={Boolean(recommendableFilter === 'BOTH')}
-						/>{' '}
-						Both
-					</label>
-					<label htmlFor="NON_RECOMMENDABLE">
-						<input
-							type="radio"
-							onChange={handleRecChange}
-							name="recommendable"
-							id="NON_RECOMMENDABLE"
-							value="NON_RECOMMENDABLE"
-							checked={Boolean(recommendableFilter === 'NON_RECOMMENDABLE')}
-						/>{' '}
-						Non Recommendable
-					</label>
-					<label htmlFor="RECOMMENDABLE">
-						<input
-							type="radio"
-							onChange={handleRecChange}
-							name="recommendable"
-							id="RECOMMENDABLE"
-							value="RECOMMENDABLE"
-							checked={Boolean(recommendableFilter === 'RECOMMENDABLE')}
-						/>{' '}
-						Recommendable
-					</label>
-				</fieldset>
-				<FilterHeader
-					tabIndex={0}
-					onClick={e => setVideosActive(!videosActive)}
-					onKeyPress={e => e.which === 13 && setVideosActive(!videosActive)}
-				>
-					trc.videos
-				</FilterHeader>
-				<FieldSetStyles className={videosActive && 'active'}>
-					{videosActive && trcVideosCheckBoxes}
-				</FieldSetStyles>
-				<FilterHeader
-					tabIndex={0}
-					onClick={e => setAuditActive(!auditActive)}
-					onKeyPress={e => e.which === 13 && setAuditActive(!auditActive)}
-				>
-					crawler.audit
-				</FilterHeader>
-				<FieldSetStyles className={auditActive && 'active'}>
-					{auditActive && crawlerAuditCheckBoxes}
-				</FieldSetStyles>
-				<FilterHeader
-					tabIndex={0}
-					onClick={e => setInstructionsActive(!instructionsActive)}
-					onKeyPress={e => e.which === 13 && setInstructionsActive(!instructionsActive)}
-				>
-					crawler.instructions
-				</FilterHeader>
-				<FieldSetStyles className={instructionsActive && 'active'}>
-					{instructionsActive && crawlerInstructionsCheckBoxes}
-				</FieldSetStyles>
-				<FilterHeader
-					tabIndex={0}
-					onClick={e => setChannelsActive(!channelsActive)}
-					onKeyPress={e => e.which === 13 && setChannelsActive(!channelsActive)}
-				>
-					channels
-				</FilterHeader>
-				<FieldSetStyles className={channelsActive && 'active'}>
-					{channelsActive && channelsCheckBoxes}
-				</FieldSetStyles>
-			</Form>
+			<StickyContainer>
+				<h4>
+					<Link href="/">
+						<a>Back to Search</a>
+					</Link>
+				</h4>
+				<h1>Filters</h1>
+				<Form>
+					<FilterHeader
+						tabIndex={0}
+						onClick={e => setRecommendableActive(!recommendableActive)}
+						onKeyPress={e => e.which === 13 && setRecommendableActive(!recommendableActive)}
+					>
+						Recommendable?
+					</FilterHeader>
+					<FieldSetStyles className={recommendableActive && 'active'}>
+						{recommendableActive && (
+							<>
+								<label htmlFor="BOTH">
+									<input
+										type="radio"
+										onChange={handleRecChange}
+										name="recommendable"
+										id="BOTH"
+										value="BOTH"
+										checked={Boolean(recommendableFilter === 'BOTH')}
+									/>{' '}
+									Both
+								</label>
+								<label htmlFor="NON_RECOMMENDABLE">
+									<input
+										type="radio"
+										onChange={handleRecChange}
+										name="recommendable"
+										id="NON_RECOMMENDABLE"
+										value="NON_RECOMMENDABLE"
+										checked={Boolean(recommendableFilter === 'NON_RECOMMENDABLE')}
+									/>{' '}
+									Non Recommendable
+								</label>
+								<label htmlFor="RECOMMENDABLE">
+									<input
+										type="radio"
+										onChange={handleRecChange}
+										name="recommendable"
+										id="RECOMMENDABLE"
+										value="RECOMMENDABLE"
+										checked={Boolean(recommendableFilter === 'RECOMMENDABLE')}
+									/>{' '}
+									Recommendable
+								</label>
+							</>
+						)}
+					</FieldSetStyles>
+					<FilterHeader
+						tabIndex={0}
+						onClick={e => setVideosActive(!videosActive)}
+						onKeyPress={e => e.which === 13 && setVideosActive(!videosActive)}
+					>
+						trc.videos
+					</FilterHeader>
+					<FieldSetStyles className={videosActive && 'active'}>
+						{videosActive && trcVideosCheckBoxes}
+					</FieldSetStyles>
+					<FilterHeader
+						tabIndex={0}
+						onClick={e => setAuditActive(!auditActive)}
+						onKeyPress={e => e.which === 13 && setAuditActive(!auditActive)}
+					>
+						crawler.audit
+					</FilterHeader>
+					<FieldSetStyles className={auditActive && 'active'}>
+						{auditActive && crawlerAuditCheckBoxes}
+					</FieldSetStyles>
+					<FilterHeader
+						tabIndex={0}
+						onClick={e => setInstructionsActive(!instructionsActive)}
+						onKeyPress={e => e.which === 13 && setInstructionsActive(!instructionsActive)}
+					>
+						crawler.instructions
+					</FilterHeader>
+					<FieldSetStyles className={instructionsActive && 'active'}>
+						{instructionsActive && crawlerInstructionsCheckBoxes}
+					</FieldSetStyles>
+					<FilterHeader
+						tabIndex={0}
+						onClick={e => setChannelsActive(!channelsActive)}
+						onKeyPress={e => e.which === 13 && setChannelsActive(!channelsActive)}
+					>
+						channels
+					</FilterHeader>
+					<FieldSetStyles className={channelsActive && 'active'}>
+						{channelsActive && channelsCheckBoxes}
+					</FieldSetStyles>
+				</Form>
+			</StickyContainer>
 		</Container>
 	)
 }
@@ -162,6 +175,11 @@ const createCheckBox = layer => (filter, filters, onChange) => (
 	</label>
 )
 
+const StickyContainer = styled.div`
+	position: sticky;
+	top: 0;
+`
+
 const Container = styled.div`
 	border-right: 3px solid ${props => props.theme.blue};
 	padding-right: 20px;
@@ -171,9 +189,6 @@ const Container = styled.div`
 	}
 `
 const Form = styled.form`
-	position: sticky;
-	top: -173px;
-
 	fieldset {
 		display: grid;
 		grid-template-columns: 1fr;

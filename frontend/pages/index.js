@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import debounce from 'lodash.debounce'
 import PubSearch from '../components/PubSearch'
 import PubList from '../components/PubList'
+import Loading from '../components/Loading'
 
 export const ALL_PUBLISHERS_QUERY = gql`
 	query ALL_PUBLISHERS_QUERY($name: String, $description: String, $id: ID) {
@@ -43,7 +44,7 @@ export default () => {
 						searchType={searchType}
 						client={client}
 					/>
-					{loading && <p className="loading-img-container">loading...</p>}
+					{loading && <Loading />}
 					{!loading && <PubList pubs={pubs} />}
 				</>
 			)}

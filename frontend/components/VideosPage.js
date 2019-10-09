@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 import Videos from './Videos'
 import Filters from './Filters'
 import Error from './Error'
+import Loading from './Loading'
 import { defaultFilters, applyFilters } from '../lib/videoFilters'
 
 export default props => {
@@ -17,13 +18,14 @@ export default props => {
 			publisher_id: parseInt(id, 10),
 			publisher_name: name,
 			recommendable_filter: recommendableFilter,
+			page: props.page,
 		},
 	})
 
 	const statusSwitch = () => {
 		switch (true) {
 			case loading:
-				return <div>loading videos...</div>
+				return <Loading />
 			case error:
 				return <Error error={error} />
 			default:
@@ -58,11 +60,13 @@ export const ALL_VIDEOS_QUERY = gql`
 		$publisher_id: Int!
 		$publisher_name: String!
 		$recommendable_filter: RecommendableFilter
+		$page: Int
 	) {
 		allVideos(
 			publisher_id: $publisher_id
 			publisher_name: $publisher_name
 			recommendable_filter: $recommendable_filter
+			page: $page
 		) {
 			pageInfo {
 				totalPages

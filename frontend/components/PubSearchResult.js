@@ -2,21 +2,19 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-export default ({ pub }) => {
-	return (
-		<Link href={`/videos?id=${pub.id}&name=${pub.name}`}>
-			<a>
-				<ResultStyles>
-					<span>{pub.id}</span>
-					<SeparatorStyles> || </SeparatorStyles>
-					<span>{pub.description}</span>
-					<SeparatorStyles> || </SeparatorStyles>
-					<span>{pub.name}</span>
-				</ResultStyles>
-			</a>
-		</Link>
-	)
-}
+export default ({ pub }) => (
+	<Link href={`/videos?id=${pub.id}&name=${pub.name}`}>
+		<a>
+			<ResultStyles>
+				<span>{pub.id}</span>
+				<SeparatorStyles> || </SeparatorStyles>
+				<span>{pub.description}</span>
+				<SeparatorStyles> || </SeparatorStyles>
+				<span>{pub.name}</span>
+			</ResultStyles>
+		</a>
+	</Link>
+)
 
 const ResultStyles = styled.div`
 	margin: 10px 0;
