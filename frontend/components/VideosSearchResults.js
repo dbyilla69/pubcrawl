@@ -6,18 +6,20 @@ import Filters from './Filters'
 import Error from './Error'
 import Loading from './Loading'
 import { defaultFilters, applyFilters } from '../lib/videoFilters'
-import { VIDEOS_WHERE_URL_QUERY } from '../lib/queries'
+import { VIDEOS_WHERE_URL_QUERY, VIDEO_WHERE_ID_QUERY } from '../lib/queries'
 
 export default props => {
 	const { id, name } = props.publisher
-	const { search } = props
+	const { searchQuery, searchType } = props
 	const [filters, setFilters] = useState(defaultFilters)
+	const query =
+		searchType === 'video_url' ? VIDEOS_WHERE_URL_QUERY : VIDEO_WHERE_ID_QUERY
 
-	const { data, error, loading } = useQuery(VIDEOS_WHERE_URL_QUERY, {
+	const { data, error, loading } = useQuery(query, {
 		variables: {
 			publisher_id: parseInt(id, 10),
 			publisher_name: name,
-			video_url: search,
+			[searchType]: searchQuery,
 		},
 	})
 
@@ -27,11 +29,14 @@ export default props => {
 				return <Loading />
 			case error:
 				return <Error error={error} />
-			default:
+			case searchType === 'video_url':
 				const mappedVideoData = data.videosWhereUrl.map(video =>
 					applyFilters({ video, filters })
 				)
 				return <Videos videos={mappedVideoData} />
+			default:
+				const video = applyFilters({ video: data.videoWhereId, filters })
+				return <Videos videos={[video]} />
 		}
 	}
 

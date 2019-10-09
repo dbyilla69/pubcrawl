@@ -6,8 +6,8 @@ import { useRouter } from 'next/router'
 export default () => {
 	const router = useRouter()
 	const [search, setSearch] = useState({
-		url: '',
-		id: '',
+		video_url: '',
+		video_id: '',
 	})
 	const handleChange = e =>
 		setSearch({ ...search, [e.target.name]: e.target.value })
@@ -30,23 +30,27 @@ export default () => {
 	return (
 		<>
 			<h1>Search</h1>
-			<Form onSubmit={e => handleSubmit(e, 'id')}>
-				<label>
+			<Form onSubmit={e => handleSubmit(e, 'video_id')}>
+				<label htmlFor="video_id-input">
+					<span>By ID</span>
 					<input
+						id="video_id-input"
 						type="text"
 						placeholder="Search by trc.videos.id"
-						name="id"
+						name="video_id"
 						onChange={handleChange}
 					></input>
 				</label>
 				<button type="submit">Go ▷</button>
 			</Form>
-			<Form onSubmit={e => handleSubmit(e, 'url')}>
-				<label>
+			<Form onSubmit={e => handleSubmit(e, 'video_url')}>
+				<label htmlFor="video_url-input">
+					<span>By Url</span>
 					<input
+						id="video_url-input"
 						type="text"
 						placeholder="Search by URL"
-						name="url"
+						name="video_url"
 						onChange={handleChange}
 					></input>
 				</label>
@@ -62,10 +66,15 @@ export default () => {
 }
 
 const Form = styled.form`
+	span {
+		font-weight: 600;
+		display: block;
+	}
+
 	input {
 		font-size: 1.5rem;
 		line-height: 2;
-		width: calc(100% - 60px);
+		width: calc(100% - 100px);
 		padding: 5px;
 		border: 1px solid black;
 		border-radius: 5px;
