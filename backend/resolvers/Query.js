@@ -38,7 +38,10 @@ module.exports = {
 
 	publisherWhereId: async (parent, args, ctx, info) => {
 		try {
-			const [publisher] = await ctx.db.query(`SELECT id, name, description FROM trc.publishers WHERE id = ?`, [args.id])
+			const [publisher] = await ctx.db.query(
+				`SELECT id, name, description FROM trc.publishers WHERE id = ?`,
+				[args.id]
+			)
 
 			return publisher
 		} catch (error) {
@@ -48,7 +51,10 @@ module.exports = {
 
 	publisherConfig: async (parent, args, ctx, info) => {
 		try {
-			const config = await ctx.db.query(`SELECT * FROM trc.publisher_config WHERE publisher_id = ?`, [args.id])
+			const config = await ctx.db.query(
+				`SELECT * FROM trc.publisher_config WHERE publisher_id = ?`,
+				[args.id]
+			)
 
 			return config
 		} catch (error) {
@@ -70,9 +76,9 @@ module.exports = {
 			return {
 				pageInfo: {
 					totalPages,
-					hasNextPage: currentPage !== totalPages
+					hasNextPage: currentPage !== totalPages,
 				},
-				edges: res
+				edges: res,
 			}
 		} catch (error) {
 			return error
@@ -84,12 +90,12 @@ module.exports = {
 			if (!ctx.videoLoader) {
 				ctx.videoLoader = makeDataLoaders(args.publisher_id, args.publisher_name)
 			}
-			
+
 			const [video] = await db.query(
 				`SELECT * FROM trc.videos WHERE publisher_id = ? AND id = ?`,
 				[args.publisher_id, args.video_id]
 			)
-			
+
 			video.publisher = args.publisher_name
 			return video
 		} catch (error) {
@@ -104,14 +110,14 @@ module.exports = {
 			}
 
 			const videos = await db.query(
-				`SELECT * FROM trc.videos WHERE publisher_id = ? AND url RLIKE ? ORDER BY create_time DESC LIMIT 50`,
+				`SELECT * FROM trc.videos WHERE publisher_id = ? AND url LIKE ? ORDER BY create_time DESC`,
 				[args.publisher_id, args.video_url]
 			)
 
-			videos.forEach(video => video.publisher = args.publisher_name)
+			videos.forEach(video => (video.publisher = args.publisher_name))
 			return videos
 		} catch (error) {
 			return error
 		}
-	}
+	},
 }
