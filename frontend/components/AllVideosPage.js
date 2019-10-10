@@ -24,6 +24,8 @@ export default props => {
 		},
 	})
 
+	const paginationData = data && data.allVideos.pageInfo
+
 	const statusSwitch = () => {
 		switch (true) {
 			case loading:
@@ -37,11 +39,7 @@ export default props => {
 				return data.allVideos.pageInfo.totalPages === 0 ? (
 					<NoResults />
 				) : (
-					<div>
-						<Pagination data={data.allVideos.pageInfo} />
-						<Videos videos={mappedVideoData} />
-						<Pagination data={data.allVideos.pageInfo} />
-					</div>
+					<Videos videos={mappedVideoData} />
 				)
 		}
 	}
@@ -55,7 +53,11 @@ export default props => {
 				recommendableFilter={recommendableFilter}
 				disabledFields={[]}
 			/>
-			{statusSwitch()}
+			<div style={{ minHeight: '80vh', position: 'relative' }}>
+				{paginationData && <Pagination data={paginationData} top={true} />}
+				{statusSwitch()}
+				{paginationData && <Pagination data={paginationData} top={false} />}
+			</div>
 		</Layout>
 	)
 }

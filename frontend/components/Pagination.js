@@ -10,7 +10,7 @@ export default props => {
 
 	// should look like First Page | Prev | currentnumber | Next | Last Page (number)
 	return (
-		<PaginationStyles>
+		<PaginationStyles top={props.top}>
 			{currentPage > 1 && (
 				<>
 					<Link href={`/videos?id=${id}&name=${name}`}>
@@ -43,6 +43,10 @@ export default props => {
 }
 
 const PaginationStyles = styled.div`
+	position: absolute;
+	left: calc(50% - 400px);
+	top: ${props => (props.top ? 0 : null)};
+	bottom: ${props => (props.top ? null : 0)};
 	font-size: 1.6rem;
 	font-weight: 500;
 	display: flex;

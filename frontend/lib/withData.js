@@ -3,7 +3,7 @@ import ApolloClient from 'apollo-boost'
 
 function createClient({ headers }) {
 	return new ApolloClient({
-		uri: 'http://localhost:4000',
+		uri: process.env.BACKEND_URL,
 	})
 }
 
