@@ -1,6 +1,6 @@
 const db = require('../db/index')
 const makeDataLoaders = require('../utils/DataLoader')
-const Cache = require('../utils/Cache')
+const PubCrawlDB = require('../utils/PubCrawlDB')
 
 module.exports = {
 	allPublishers: async (parent, args, ctx, info) => {
@@ -68,16 +68,16 @@ module.exports = {
 				ctx.videoLoader = makeDataLoaders(args.publisher_id, args.publisher_name)
 			}
 
-			const res = await Cache.getVideos(args)
+			const res = await PubCrawlDB.getVideos(args)
 
 			res.forEach(video => (video.publisher = args.publisher_name))
 
-			const totalPages = await Cache.getPageInfo(args)
+			const totalPages = await PubCrawlDB.getPageInfo(args)
 			const currentPage = args.page || 1
 			return {
 				pageInfo: {
 					totalPages,
-					hasNextPage: currentPage !== totalPages,
+					hasNextPage: currentPage < totalPages,
 				},
 				edges: res,
 			}
@@ -96,8 +96,8 @@ module.exports = {
 				`SELECT * FROM trc.videos WHERE publisher_id = ? AND id = ?`,
 				[args.publisher_id, args.video_id]
 			)
+			if (video) video.publisher = args.publisher_name
 
-			video.publisher = args.publisher_name
 			return video
 		} catch (error) {
 			return error

@@ -1,11 +1,10 @@
 const { ApolloServer } = require('apollo-server')
-const { importSchema } = require('graphql-import')
+const responseCachePlugin = require('apollo-server-plugin-response-cache')
 const db = require('./db/index')
 
+const typeDefs = require('./schema')
 const Query = require('./resolvers/Query')
 const Video = require('./resolvers/Video')
-
-const typeDefs = importSchema('./schema.graphql')
 
 const resolvers = { Query, Video }
 
@@ -16,6 +15,7 @@ const server = new ApolloServer({
 		ctx.db = db
 		return ctx
 	},
+	plugins: [responseCachePlugin()],
 })
 
 server.listen().then(({ url }) => console.log(`Server listening at ${url}`))
