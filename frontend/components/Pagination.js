@@ -8,7 +8,6 @@ export default props => {
 	const currentPage = parseInt(router.query.page, 10) || 1
 	const { totalPages, hasNextPage } = props.data
 
-	// should look like First Page | Prev | currentnumber | Next | Last Page (number)
 	return (
 		<PaginationStyles top={props.top}>
 			{currentPage > 1 && (
