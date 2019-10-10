@@ -19,12 +19,12 @@ export default ({
 	const [auditActive, setAuditActive] = useState(false)
 	const [instructionsActive, setInstructionsActive] = useState(false)
 	const [channelsActive, setChannelsActive] = useState(false)
-
 	const checkboxes = makeCheckBoxes({ filters, setFilters })
 	const handleRecChange = (e) => {
-		router.replace(`/videos?id=${id}&name=${name}`)
+		router.replace(`/videos?id=${id}&name=${name}&page=1`)
 		setRecommendableFilter(e.target.value)
 	}
+
 	return (
 		<Container>
 			<LinkStyles>

@@ -9,7 +9,7 @@ import NoResults from './NoResults'
 import { defaultFilters, applyFilters } from '../lib/videoFilters'
 import { VIDEOS_WHERE_URL_QUERY, VIDEO_WHERE_ID_QUERY } from '../lib/queries'
 
-export default props => {
+export default (props) => {
 	const { id, name } = props.publisher
 	const { searchQuery, searchType } = props
 	const [filters, setFilters] = useState(defaultFilters)
@@ -25,30 +25,21 @@ export default props => {
 	})
 
 	const statusSwitch = () => {
-		switch (true) {
-			case loading:
-				return <Loading />
-			case !!error:
-				return <Error error={error} />
-			case searchType === 'video_url':
-				const mappedVideoData = data.videosWhereUrl.map(video =>
-					applyFilters({ video, filters })
-				)
-				return mappedVideoData.length ? (
-					<Videos videos={mappedVideoData} />
-				) : (
-					<NoResults />
-				)
+		if (loading) return <Loading />
+		if (error) return <Error error={error} />
 
-			default:
-				return data.videoWhereId ? (
-					<Videos
-						videos={[applyFilters({ video: data.videoWhereId, filters })]}
-					/>
-				) : (
-					<NoResults />
-				)
+		if (searchType === 'video_url') {
+			const mappedVideoData = data.videosWhereUrl.map((video) =>
+				applyFilters({ video, filters })
+			)
+
+			if (!mappedVideoData.length) return <NoResults />
+
+			return <Videos videos={mappedVideoData} />
 		}
+
+		if (!data.videoWhereId) return <NoResults />
+		return <Videos videos={[applyFilters({ video: data.videoWhereId, filters })]} />
 	}
 
 	return (

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Videos from './Videos'
 import Filters from './Filters'
 import Pagination from './Pagination'
+import LoadingPagination from './LoadingPagination'
 import Error from './Error'
 import Loading from './Loading'
 import NoResults from './NoResults'
@@ -27,21 +28,27 @@ export default (props) => {
 	const paginationData = data && data.allVideos.pageInfo
 
 	const statusSwitch = () => {
-		switch (true) {
-			case loading:
-				return <Loading />
-			case !!error:
-				return <Error error={error} />
-			default:
-				const mappedVideoData = data.allVideos.edges.map((video) =>
-					applyFilters({ video, filters })
-				)
-				return data.allVideos.pageInfo.totalPages === 0 ? (
-					<NoResults />
-				) : (
-					<Videos videos={mappedVideoData} />
-				)
+		if (loading) return <Loading />
+		if (error) return <Error error={error} />
+
+		const noResults = data.allVideos.pageInfo.totalPages === 0
+
+		if (noResults) return <NoResults />
+
+		const mappedVideoData = data.allVideos.edges.map((video) =>
+			applyFilters({ video, filters })
+		)
+		return <Videos videos={mappedVideoData} />
+	}
+
+	const showPagination = ({ top, paginationData }) => {
+		const shouldShowLoading = props.page === 1 && loading
+
+		if (shouldShowLoading) {
+			return <LoadingPagination top={top} />
 		}
+
+		return <Pagination data={paginationData} top={top} />
 	}
 
 	return (
@@ -54,9 +61,9 @@ export default (props) => {
 				disabledFields={[]}
 			/>
 			<div style={{ minHeight: '80vh', position: 'relative' }}>
-				{paginationData && <Pagination data={paginationData} top={true} />}
+				{paginationData && showPagination({ top: true, paginationData })}
 				{statusSwitch()}
-				{paginationData && <Pagination data={paginationData} top={false} />}
+				{paginationData && showPagination({ top: false, paginationData })}
 			</div>
 		</Layout>
 	)
