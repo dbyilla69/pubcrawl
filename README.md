@@ -44,6 +44,7 @@ _DataLoader.js_ - exports a function that creates three DataLoader instances wit
 _PubCrawlDB_ - a utility for interacting running more complex transactions in the database.
 
 **resolvers**
+
 Contains our top-level Query resolvers and resolvers for our nested Videos that use our DataLoaders.
 
 **db**
