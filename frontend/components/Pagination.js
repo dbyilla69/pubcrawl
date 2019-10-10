@@ -9,7 +9,7 @@ export default (props) => {
 	const { totalPages, hasNextPage } = props.data
 
 	const showPrevPageLinks = () => {
-		if (currentPage < 1) {
+		if (currentPage <= 1) {
 			return (
 				<>
 					<span>First Page</span>|<span>Prev</span>|
