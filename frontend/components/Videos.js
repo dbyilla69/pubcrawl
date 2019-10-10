@@ -25,29 +25,35 @@ export default props => {
 					const isEven = idx % 2 === 0
 
 					if (property === 'channelsData') {
-						const channelContainer = video.channelsData.map((channel, channelIdx) => {
-							const channelIsEven = channelIdx % 2 === 0
-							const channelCells = Object.keys(channel).map(channelProperty => {
-								return makeCell({
-									key: channelProperty,
-									value: channel[channelProperty],
-									isEven: true,
-								})
-							})
-							if (!channelCells.length) return
+						const channelContainer = video.channelsData.map(
+							(channel, channelIdx) => {
+								const channelIsEven = channelIdx % 2 === 0
+								const channelCells = Object.keys(channel).map(
+									channelProperty => {
+										return makeCell({
+											key: channelProperty,
+											value: channel[channelProperty],
+											isEven: true,
+										})
+									}
+								)
+								if (!channelCells.length) return
 
-							return (
-								<ChannelContainer
-									key={Math.floor(Math.random() * 10000)}
-									className={channelIsEven ? 'even' : 'odd'}
-								>
-									{channelCells}
-								</ChannelContainer>
-							)
-						})
+								return (
+									<ChannelContainer
+										key={Math.floor(Math.random() * 10000)}
+										className={channelIsEven ? 'even' : 'odd'}
+									>
+										{channelCells}
+									</ChannelContainer>
+								)
+							}
+						)
 
 						// a check to see if there are any channels with active filters
-						const shouldShowChannelsData = !!Object.keys(video.channelsData[0] || {}).length
+						const shouldShowChannelsData = !!Object.keys(
+							video.channelsData[0] || {}
+						).length
 
 						return (
 							<div key={Math.floor(Math.random() * 10000)}>
@@ -58,9 +64,14 @@ export default props => {
 					}
 
 					if (nestedProperties.includes(property)) {
-						return Object.keys(video[property]).map(nestedProp =>
-							makeCell({ key: nestedProp, value: video[property][nestedProp], isEven })
-						)
+						return Object.keys(video[property]).map((nestedProp, idx) => {
+							const nestedIsEven = isEven ? idx % 2 === 0 : idx % 2 === 1
+							return makeCell({
+								key: nestedProp,
+								value: video[property][nestedProp],
+								isEven: nestedIsEven,
+							})
+						})
 					}
 
 					return makeCell({ key: property, value: video[property], isEven })

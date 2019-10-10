@@ -31,7 +31,7 @@ const LoadingStyles = styled.div`
 		left: 50%;
 		margin-left: -100px;
 		position: fixed;
-		top: 50%;
+		top: 60%;
 		margin-top: -100px;
 		width: 45px;
 		z-index: 9000;
@@ -66,7 +66,8 @@ const LoadingStyles = styled.div`
 	.loader-path {
 		stroke-dasharray: 150, 200;
 		stroke-dashoffset: -10;
-		-webkit-animation: dash 1.5s ease-in-out infinite, color 3s ease-in-out infinite;
+		-webkit-animation: dash 1.5s ease-in-out infinite,
+			color 3s ease-in-out infinite;
 		animation: dash 1.5s ease-in-out infinite, color 3s ease-in-out infinite;
 		stroke-linecap: round;
 	}

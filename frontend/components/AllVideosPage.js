@@ -33,7 +33,9 @@ export default props => {
 				const mappedVideoData = data.allVideos.edges.map(video =>
 					applyFilters({ video, filters })
 				)
-				return (
+				return data.allVideos.pageInfo.totalPages === 0 ? (
+					<NoResultsStyles>No Results</NoResultsStyles>
+				) : (
 					<div>
 						<Pagination data={data.allVideos.pageInfo} />
 						<Videos videos={mappedVideoData} />
@@ -61,4 +63,11 @@ const Layout = styled.main`
 	display: grid;
 	grid-template-columns: 1fr 4fr;
 	grid-column-gap: 50px;
+`
+
+const NoResultsStyles = styled.div`
+	margin: 20vh 0 0 25vw;
+	font-size: 2rem;
+	font-weight: 500;
+	color: #ffa303;
 `
