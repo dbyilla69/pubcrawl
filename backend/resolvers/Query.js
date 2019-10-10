@@ -69,9 +69,10 @@ module.exports = {
 			}
 
 			const res = await Cache.getVideos(args)
+
 			res.forEach(video => (video.publisher = args.publisher_name))
 
-			const totalPages = await Cache.getPageInfo(args.publisher_id)
+			const totalPages = await Cache.getPageInfo(args)
 			const currentPage = args.page || 1
 			return {
 				pageInfo: {
