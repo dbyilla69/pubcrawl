@@ -2,7 +2,7 @@ const db = require('../db/index')
 const { perPage } = require('../config.js')
 
 module.exports = {
-	getVideos: async (args) => {
+	async getVideos(args) {
 		try {
 			const page = args.page - 1 || 0
 			const skip = page * perPage
@@ -69,7 +69,7 @@ module.exports = {
 		}
 	},
 
-	getCrawlerAuditData:  async (pubName, ids) => {
+	async getCrawlerAuditData(pubName, ids) {
 		try {
 			const placeholders = ids.map(id => '?').join()
 			const auditData = await db.query(
@@ -89,7 +89,7 @@ module.exports = {
 		}
 	},
 
-	getCrawlerInstructionsData: async (pubName, ids) => {
+	async getCrawlerInstructionsData(pubName, ids) {
 		try {
 			const placeholders = ids.map(id => '?').join()
 			const instructionsData = await db.query(
@@ -109,10 +109,7 @@ module.exports = {
 		}
 	},
 
-	getPageInfo: async ({
-		publisher_id,
-		recommendable_filter,
-	}) => {
+	async getPageInfo({ publisher_id, recommendable_filter }) {
 		try {
 			let sql
 
@@ -136,7 +133,7 @@ module.exports = {
 		}
 	},
 
-	getChannelsData:  async (pubId, ids) => {
+	async getChannelsData(pubId, ids) {
 		try {
 			const placeholders = ids.map(id => '?').join()
 			const channels = await db.query(
@@ -158,5 +155,5 @@ module.exports = {
 		} catch (error) {
 			throw error
 		}
-	}
+	},
 }

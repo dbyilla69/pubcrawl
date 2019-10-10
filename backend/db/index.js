@@ -26,11 +26,9 @@ const getConnection = util.promisify(cluster.getConnection).bind(cluster)
 module.exports = {
 	query: async (sql, values) => {
 		try {
-			values = values || undefined
-
 			const connection = await getConnection('*')
 			const query = util.promisify(connection.query).bind(connection)
-			
+
 			const results = await query(sql, values)
 
 			connection.release()
