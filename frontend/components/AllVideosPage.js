@@ -10,7 +10,7 @@ import NoResults from './NoResults'
 import { defaultFilters, applyFilters } from '../lib/videoFilters'
 import { ALL_VIDEOS_QUERY } from '../lib/queries'
 
-export default props => {
+export default (props) => {
 	const { id, name } = props.publisher
 	const [filters, setFilters] = useState(defaultFilters)
 	const [recommendableFilter, setRecommendableFilter] = useState('BOTH')
@@ -33,7 +33,7 @@ export default props => {
 			case !!error:
 				return <Error error={error} />
 			default:
-				const mappedVideoData = data.allVideos.edges.map(video =>
+				const mappedVideoData = data.allVideos.edges.map((video) =>
 					applyFilters({ video, filters })
 				)
 				return data.allVideos.pageInfo.totalPages === 0 ? (

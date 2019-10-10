@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import VideoSearch from './VideoSearch'
 import makeCheckBoxes from '../lib/makeCheckBoxes'
 
@@ -11,6 +12,8 @@ export default ({
 	recommendableFilter,
 	disabledFields,
 }) => {
+	const router = useRouter()
+	const { id, name } = router.query
 	const [recommendableActive, setRecommendableActive] = useState(false)
 	const [videosActive, setVideosActive] = useState(false)
 	const [auditActive, setAuditActive] = useState(false)
@@ -18,7 +21,10 @@ export default ({
 	const [channelsActive, setChannelsActive] = useState(false)
 
 	const checkboxes = makeCheckBoxes({ filters, setFilters })
-	const handleRecChange = e => setRecommendableFilter(e.target.value)
+	const handleRecChange = (e) => {
+		router.replace(`/videos?id=${id}&name=${name}`)
+		setRecommendableFilter(e.target.value)
+	}
 	return (
 		<Container>
 			<LinkStyles>
@@ -34,8 +40,10 @@ export default ({
 					<>
 						<FilterHeader
 							tabIndex={0}
-							onClick={e => setRecommendableActive(!recommendableActive)}
-							onKeyPress={e => e.which === 13 && setRecommendableActive(!recommendableActive)}
+							onClick={(e) => setRecommendableActive(!recommendableActive)}
+							onKeyPress={(e) =>
+								e.which === 13 && setRecommendableActive(!recommendableActive)
+							}
 						>
 							Recommendable?
 						</FilterHeader>
@@ -51,7 +59,7 @@ export default ({
 											value="BOTH"
 											checked={Boolean(recommendableFilter === 'BOTH')}
 										/>{' '}
-										Both
+										All
 									</label>
 									<label htmlFor="NON_RECOMMENDABLE">
 										<input
@@ -62,7 +70,7 @@ export default ({
 											value="NON_RECOMMENDABLE"
 											checked={Boolean(recommendableFilter === 'NON_RECOMMENDABLE')}
 										/>{' '}
-										Non Recommendable
+										Non Recommendable or Expired
 									</label>
 									<label htmlFor="RECOMMENDABLE">
 										<input
@@ -73,7 +81,7 @@ export default ({
 											value="RECOMMENDABLE"
 											checked={Boolean(recommendableFilter === 'RECOMMENDABLE')}
 										/>{' '}
-										Recommendable
+										Recommendable and Not Expired
 									</label>
 								</>
 							)}
@@ -82,8 +90,8 @@ export default ({
 				)}
 				<FilterHeader
 					tabIndex={0}
-					onClick={e => setVideosActive(!videosActive)}
-					onKeyPress={e => e.which === 13 && setVideosActive(!videosActive)}
+					onClick={(e) => setVideosActive(!videosActive)}
+					onKeyPress={(e) => e.which === 13 && setVideosActive(!videosActive)}
 				>
 					trc.videos
 				</FilterHeader>
@@ -92,8 +100,8 @@ export default ({
 				</FieldSetStyles>
 				<FilterHeader
 					tabIndex={0}
-					onClick={e => setAuditActive(!auditActive)}
-					onKeyPress={e => e.which === 13 && setAuditActive(!auditActive)}
+					onClick={(e) => setAuditActive(!auditActive)}
+					onKeyPress={(e) => e.which === 13 && setAuditActive(!auditActive)}
 				>
 					crawler.audit
 				</FilterHeader>
@@ -102,8 +110,8 @@ export default ({
 				</FieldSetStyles>
 				<FilterHeader
 					tabIndex={0}
-					onClick={e => setInstructionsActive(!instructionsActive)}
-					onKeyPress={e => e.which === 13 && setInstructionsActive(!instructionsActive)}
+					onClick={(e) => setInstructionsActive(!instructionsActive)}
+					onKeyPress={(e) => e.which === 13 && setInstructionsActive(!instructionsActive)}
 				>
 					crawler.instructions
 				</FilterHeader>
@@ -112,8 +120,8 @@ export default ({
 				</FieldSetStyles>
 				<FilterHeader
 					tabIndex={0}
-					onClick={e => setChannelsActive(!channelsActive)}
-					onKeyPress={e => e.which === 13 && setChannelsActive(!channelsActive)}
+					onClick={(e) => setChannelsActive(!channelsActive)}
+					onKeyPress={(e) => e.which === 13 && setChannelsActive(!channelsActive)}
 				>
 					channels
 				</FilterHeader>
@@ -126,7 +134,7 @@ export default ({
 }
 
 const Container = styled.div`
-	border-right: 3px solid ${props => props.theme.blue};
+	border-right: 3px solid ${(props) => props.theme.blue};
 	padding: 0 20px 10vh 0;
 	height: 100vh;
 	overflow: scroll;
@@ -136,7 +144,7 @@ const Container = styled.div`
 
 	h1 {
 		margin-bottom: 0;
-		color: ${props => props.theme.blue};
+		color: ${(props) => props.theme.blue};
 	}
 `
 
