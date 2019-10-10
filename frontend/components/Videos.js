@@ -99,6 +99,7 @@ const VideoResult = styled.div`
 		display: grid;
 		grid-template-columns: 250px auto;
 		justify-content: start;
+		word-break: break-word;
 
 		&.even {
 			background-color: ${props => props.theme.lightgrey};
