@@ -5,6 +5,7 @@ import Videos from './Videos'
 import Filters from './Filters'
 import Error from './Error'
 import Loading from './Loading'
+import NoResults from './NoResults'
 import { defaultFilters, applyFilters } from '../lib/videoFilters'
 import { VIDEOS_WHERE_URL_QUERY, VIDEO_WHERE_ID_QUERY } from '../lib/queries'
 
@@ -27,16 +28,26 @@ export default props => {
 		switch (true) {
 			case loading:
 				return <Loading />
-			case error:
+			case !!error:
 				return <Error error={error} />
 			case searchType === 'video_url':
 				const mappedVideoData = data.videosWhereUrl.map(video =>
 					applyFilters({ video, filters })
 				)
-				return <Videos videos={mappedVideoData} />
+				return mappedVideoData.length ? (
+					<Videos videos={mappedVideoData} />
+				) : (
+					<NoResults />
+				)
+
 			default:
-				const video = applyFilters({ video: data.videoWhereId, filters })
-				return <Videos videos={[video]} />
+				return data.videoWhereId ? (
+					<Videos
+						videos={[applyFilters({ video: data.videoWhereId, filters })]}
+					/>
+				) : (
+					<NoResults />
+				)
 		}
 	}
 

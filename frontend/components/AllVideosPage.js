@@ -6,6 +6,7 @@ import Filters from './Filters'
 import Pagination from './Pagination'
 import Error from './Error'
 import Loading from './Loading'
+import NoResults from './NoResults'
 import { defaultFilters, applyFilters } from '../lib/videoFilters'
 import { ALL_VIDEOS_QUERY } from '../lib/queries'
 
@@ -27,14 +28,14 @@ export default props => {
 		switch (true) {
 			case loading:
 				return <Loading />
-			case error:
+			case !!error:
 				return <Error error={error} />
 			default:
 				const mappedVideoData = data.allVideos.edges.map(video =>
 					applyFilters({ video, filters })
 				)
 				return data.allVideos.pageInfo.totalPages === 0 ? (
-					<NoResultsStyles>No Results</NoResultsStyles>
+					<NoResults />
 				) : (
 					<div>
 						<Pagination data={data.allVideos.pageInfo} />
@@ -63,11 +64,4 @@ const Layout = styled.main`
 	display: grid;
 	grid-template-columns: 1fr 4fr;
 	grid-column-gap: 50px;
-`
-
-const NoResultsStyles = styled.div`
-	margin: 20vh 0 0 25vw;
-	font-size: 2rem;
-	font-weight: 500;
-	color: #ffa303;
 `
