@@ -59,4 +59,9 @@ const PaginationStyles = styled.div`
 	a {
 		color: ${props => props.theme.blue};
 	}
+
+	a,
+	span {
+		width: 180px;
+	}
 `
