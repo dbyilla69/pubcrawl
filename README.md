@@ -33,10 +33,12 @@ Exports our GraphQL schema with cache hint directives from apollo server.
 If we ever need to change the pagination rules of our server and site, just change the `perPage` value here and it will ripple through the client and server.
 
 **utils**
+```
 	|
 	|- DataLoader.js - exports a function that creates three DataLoader instances with some scoped information about the current publisher.
 	|
 	|- PubCrawlDB - a utility for interacting running more complex transactions in the database.
+```
 
 **resolvers**
 Contains our top-level Query resolvers and resolvers for our nested Videos that use our DataLoaders.
