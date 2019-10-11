@@ -71,7 +71,7 @@ module.exports = {
 
 	async getCrawlerAuditData(pubName, ids) {
 		try {
-			const placeholders = ids.map(id => '?').join()
+			const placeholders = ids.map((id) => '?').join()
 			const auditData = await db.query(
 				`
 						SELECT * FROM crawler.audit 
@@ -91,7 +91,7 @@ module.exports = {
 
 	async getCrawlerInstructionsData(pubName, ids) {
 		try {
-			const placeholders = ids.map(id => '?').join()
+			const placeholders = ids.map((id) => '?').join()
 			const instructionsData = await db.query(
 				`
 						SELECT * FROM crawler.instructions 
@@ -135,14 +135,14 @@ module.exports = {
 
 	async getChannelsData(pubId, ids) {
 		try {
-			const placeholders = ids.map(id => '?').join()
+			const placeholders = ids.map((id) => '?').join()
 			const channels = await db.query(
 				`
 						SELECT channel.*, parent.channel as parent_channel, parent.id as parent_channel_id, trc.video_channels.* 
 						FROM trc.video_channels
-						INNER JOIN trc.publisher_channels as channel 
+						JOIN trc.publisher_channels as channel 
 						ON trc.video_channels.channel_id = channel.id
-						INNER JOIN trc.publisher_channels as parent
+						LEFT JOIN trc.publisher_channels as parent
 						ON channel.parent_channel = parent.id
 						WHERE channel.publisher_id = ?
 						AND trc.video_channels.video_id IN (${placeholders})
