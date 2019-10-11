@@ -1,14 +1,23 @@
-FROM node:6.7.0
-
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash​
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV​
-COPY . /usr/src/app
-
-EXPOSE 80​
-
-ENTRYPOINT ["sh", "./entrypoint.sh"]
-CMD ["yarn", "run", "start"]
+FROM risingstack/alpine:3.4-v6.7.0-4.0.0
+​
+MAINTAINER Martino Fornasa <mf@fornasa.it>
+​
+WORKDIR /opt/app
+​
+# Install yarn
+RUN mkdir -p /opt
+ADD latest.tar.gz /opt/
+RUN mv /opt/dist /opt/yarn
+ENV PATH "$PATH:/opt/yarn/bin"
+​
+ADD package.json yarn.lock /tmp/
+​
+# Copy cache contents (if any) from local machine
+ADD .yarn-cache.tgz /
+​
+# Install packages
+RUN cd /tmp && yarn
+RUN mkdir -p /opt/app && cd /opt/app && ln -s /tmp/node_modules
+​
+# Copy the code
+ADD . /opt/app
