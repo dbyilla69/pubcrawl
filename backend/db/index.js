@@ -19,7 +19,7 @@ const clusterConfig = {
 }
 
 const cluster = mysql.createPoolCluster(clusterConfig)
-;[...Array(15)].forEach(idx => cluster.add(poolConfig))
+;[...Array(15)].forEach((_) => cluster.add(poolConfig))
 
 const getConnection = util.promisify(cluster.getConnection).bind(cluster)
 
