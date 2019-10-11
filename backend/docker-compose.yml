@@ -1,8 +1,0 @@
-app:
-build: .
-volumes_from:
-- yarn-cache
-yarn-cache:
-image: busybox
-volumes:
-- /root/.yarn-cache

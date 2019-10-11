@@ -1,19 +1,8 @@
-FROM node:12-alpine
-WORKDIR /opt/app
-# Install yarn
-RUN mkdir -p /opt
-ADD latest.tar.gz /opt/
-RUN mv /opt/dist /opt/yarn
-ENV PATH "$PATH:/opt/yarn/bin"
-
-ADD package.json yarn.lock /tmp/ 
-# Copy cache contents (if any) from local machine
-ADD .yarn-cache.tgz /
-
-# Install packages
-RUN cd /tmp && yarn
-RUN mkdir -p /opt/app && cd /opt/app && ln -s /tmp/node_modules
-# Copy the code
-ADD . /opt/app
-
-CMD ["yarn", "run", "start"]
+FROM node:10
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+RUN npm ci --only=production
+COPY . .
+EXPOSE 8080
+CMD ["node", "index.js"]

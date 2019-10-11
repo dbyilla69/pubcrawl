@@ -11,11 +11,11 @@ const resolvers = { Query, Video }
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
-	context: ctx => {
+	context: (ctx) => {
 		ctx.db = db
 		return ctx
 	},
 	plugins: [responseCachePlugin()],
 })
 
-server.listen().then(({ url }) => console.log(`Server listening at ${url}`))
+server.listen(8888).then(({ url }) => console.log(`Server listening at ${url}`))
