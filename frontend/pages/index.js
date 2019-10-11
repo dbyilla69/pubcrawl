@@ -38,20 +38,22 @@ export default () => {
 	}, 200)
 
 	return (
-		<ApolloConsumer>
-			{client => (
-				<>
-					<PubSearch
-						onChange={onChange}
-						setSearchType={setSearchType}
-						searchType={searchType}
-						client={client}
-					/>
-					{loading && <Loading />}
-					{!loading && !initialLoad && !pubs.length ? <NoResults /> : null}
-					{!loading && <PubList pubs={pubs} />}
-				</>
-			)}
-		</ApolloConsumer>
+		<>
+			<ApolloConsumer>
+				{(client) => (
+					<>
+						<PubSearch
+							onChange={onChange}
+							setSearchType={setSearchType}
+							searchType={searchType}
+							client={client}
+						/>
+						{loading && <Loading />}
+						{!loading && !initialLoad && !pubs.length ? <NoResults /> : null}
+						{!loading && <PubList pubs={pubs} />}
+					</>
+				)}
+			</ApolloConsumer>
+		</>
 	)
 }

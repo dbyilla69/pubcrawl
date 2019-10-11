@@ -1,6 +1,5 @@
 import Document, { Html, Main, NextScript, Head } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-
 // This is allowing styled-components to work on the server side.
 // Without this, the css won't apply to the page when it first loads, causing a flicker.
 
@@ -12,7 +11,7 @@ export default class MyDocument extends Document {
 		try {
 			ctx.renderPage = () =>
 				originalRenderPage({
-					enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
+					enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
 				})
 
 			const initialProps = await Document.getInitialProps(ctx)

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export default (props) => (
 	<PaginationStyles top={props.top}>
-		<span>Page 1 of ?</span>|<span>Next</span>|<span>Last Page ?</span>
+		<span>First Page</span>|<span>Prev</span><span>Page 1 of ?</span>|<span>Next</span>|<span>Last Page ?</span>
 	</PaginationStyles>
 )
 

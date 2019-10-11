@@ -23,6 +23,7 @@ class MyApp extends App {
 		return (
 			<>
 				<Head>
+					<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 					<title>Pub Crawler</title>
 				</Head>
 				<ApolloProvider client={apollo}>
