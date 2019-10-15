@@ -27,7 +27,7 @@ export default (props) => {
 				key={Math.floor(Math.random() * 1000000)}
 				className={isEven ? 'even' : 'odd'}
 			>
-				{Object.keys(video).map((property, idx) => {
+				{Object.keys(video).map((property) => {
 					if (property === 'channelsData') {
 						// a check to see if there are any channels with active filters
 						const numChannels = Object.keys(video.channelsData[0] || {}).length;
@@ -65,7 +65,7 @@ export default (props) => {
 					}
 
 					if (nestedProperties.includes(property)) {
-						return Object.keys(video[property]).map((nestedProp, idx) => {
+						return Object.keys(video[property]).map((nestedProp) => {
 							return makeCell({
 								key: nestedProp,
 								value: video[property][nestedProp],
@@ -76,7 +76,6 @@ export default (props) => {
 					return makeCell({
 						key: property,
 						value: video[property],
-						isEven,
 					});
 				})}
 			</VideoResult>
