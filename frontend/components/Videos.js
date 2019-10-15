@@ -1,25 +1,25 @@
 import styled from 'styled-components';
 import { nestedProperties } from '../lib/videoFilters';
 
+const makeCell = (function() {
+	let counter = 0;
+	return ({ key, value }) => {
+		counter += 1;
+		const isEven = counter % 2 === 0;
+
+		return (
+			<div
+				className={isEven ? `cell even` : `cell odd`}
+				key={`${key}:${value}${Math.floor(Math.random() * 100)}`}
+			>
+				<span className="key">{key}:</span>
+				<span>{value ? value.toString() : '(null)'}</span>
+			</div>
+		);
+	};
+})();
+
 export default (props) => {
-	const makeCell = (function() {
-		let counter = 0;
-		return ({ key, value }) => {
-			counter += 1;
-			const isEven = counter % 2 === 0;
-
-			return (
-				<div
-					className={isEven ? `cell even` : `cell odd`}
-					key={`${key}:${value}${Math.floor(Math.random() * 100)}`}
-				>
-					<span className="key">{key}:</span>
-					<span>{value ? value.toString() : '(null)'}</span>
-				</div>
-			);
-		};
-	})();
-
 	const mappedVids = props.videos.map((video, idx) => {
 		const isEven = idx % 2 === 0;
 		return (
@@ -113,7 +113,7 @@ const VideoResult = styled.div`
 	}
 
 	h3 {
-		margin: 5px 0 0;
+		margin: 10px 0 0;
 		color: ${(props) => props.theme.blue};
 	}
 `;
