@@ -151,7 +151,24 @@ module.exports = {
 			);
 
 			if (channels.fatal) throw new Error('PubCrawlDB response failed');
+
 			return channels;
+		} catch (error) {
+			return error;
+		}
+	},
+
+	async getMetaData(ids) {
+		try {
+			const placeholders = ids.map(() => '?').join();
+			const metaData = await db.query(
+				`SELECT * FROM trc.video_metadata WHERE video_id IN (${placeholders})`,
+				[...ids],
+			);
+
+			if (metaData.fatal) throw new Error('PubCrawlDB response failed');
+
+			return metaData;
 		} catch (error) {
 			return error;
 		}

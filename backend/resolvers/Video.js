@@ -10,4 +10,8 @@ module.exports = {
 	async channelsData(parent, args, ctx, info) {
 		return Promise.resolve(ctx.videoLoader.channels.load(parent.id));
 	},
+
+	async metaData(parent, args, ctx, info) {
+		return Promise.resolve(ctx.videoLoader.metaData.load(parent.id));
+	},
 };

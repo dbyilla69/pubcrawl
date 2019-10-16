@@ -49,6 +49,7 @@ module.exports = gql`
 		crawlerAuditData: CrawlerAuditData
 		crawlerInstructionsData: CrawlerInstructionsData
 		channelsData: [Channel]
+		metaData: [Metadatum]
 	}
 
 	type Channel @cacheControl(maxAge: 120) {
@@ -59,6 +60,12 @@ module.exports = gql`
 		channel: String
 		display_ads_prob: String
 		is_reports_visible: Boolean
+	}
+
+	type Metadatum {
+		id: ID!
+		name: String
+		value: String
 	}
 
 	type CrawlerAuditData @cacheControl(maxAge: 120) {

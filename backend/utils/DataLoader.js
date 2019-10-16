@@ -29,6 +29,16 @@ const makeDataLoaders = (pubId, pubName) => ({
 			return error;
 		}
 	}),
+
+	metaData: new DataLoader(async (ids) => {
+		try {
+			const res = await PubCrawlDB.getMetaData(ids);
+
+			return ids.map((id) => res.filter((metaData) => metaData.video_id === id));
+		} catch (error) {
+			return error;
+		}
+	}),
 });
 
 module.exports = makeDataLoaders;
