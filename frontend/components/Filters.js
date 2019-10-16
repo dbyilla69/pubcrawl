@@ -126,6 +126,16 @@ export default ({
 				<FieldSetStyles className={channelsActive && 'active'}>
 					{channelsActive && checkboxes.channelsCheckBoxes}
 				</FieldSetStyles>
+				<label className="metadata-toggle" htmlFor="metadata">
+					metadata
+					<input
+						type="checkbox"
+						name="metadata"
+						id="metadata"
+						checked={filters.metaData}
+						onChange={() => setFilters({ ...filters, metaData: !filters.metaData })}
+					/>
+				</label>
 			</Form>
 		</Container>
 	);
@@ -150,6 +160,18 @@ const Form = styled.form`
 	fieldset {
 		display: grid;
 		grid-template-columns: 1fr;
+	}
+
+	.metadata-toggle {
+		font-size: 2rem;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	input#metadata {
+		margin-left: 10px;
+		height: 1.3rem;
+
 	}
 `;
 

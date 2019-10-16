@@ -41,13 +41,16 @@ export const applyFilters = ({ video, filters }) => {
 	const channelsData = video.channelsData
 		.map((videoChannel) => Object.entries(channelsFilters).reduce(makeVideoReducer(videoChannel)(), {}));
 
+	const metaData = filters.metaData ? video.metaData : null;
+
 	const filteredVideo = {
 		...trcVideosData,
 		crawlerAuditData: {
 			...crawlerAuditData,
 		},
 		crawlerInstructionsData: { ...crawlerInstructionsData },
-		channelsData: [...channelsData],
+		channelsData,
+		metaData,
 	};
 
 	return filteredVideo;
@@ -105,4 +108,5 @@ export const defaultFilters = {
 		display_ads_prob: false,
 		is_reports_visible: false,
 	},
+	metaData: false,
 };

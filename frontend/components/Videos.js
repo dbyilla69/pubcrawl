@@ -32,7 +32,7 @@ export default (props) => {
 
 								return (
 									<ChannelContainer
-										key={Math.floor(Math.random() * 10000)}
+										key={Math.floor(Math.random() * 100000)}
 										className={
 											channelIsEven ? 'even' : 'odd'
 										}
@@ -44,9 +44,27 @@ export default (props) => {
 						);
 
 						return (
-							<div key={Math.floor(Math.random() * 10000)}>
+							<div key={Math.floor(Math.random() * 100000)}>
 								<h3>Channel Data</h3>
 								{channelContainer}
+							</div>
+						);
+					}
+
+					if (property === 'metaData') {
+						if (!video.metaData || video.metaData.length === 0) return;
+
+						const metaDataCells = video.metaData.map(
+							(metaDatum) => {
+								const { name, value } = metaDatum;
+								return <Cell displayKey={name} value={value} key={`${name}-${value}`} />;
+							},
+						);
+
+						return (
+							<div key={Math.floor(Math.random() * 100000)}>
+								<h3>MetaData</h3>
+								{metaDataCells}
 							</div>
 						);
 					}
@@ -95,7 +113,7 @@ const VideoResult = styled.div`
 	}
 
 	h3 {
-		margin: 10px 0 0;
+		margin: 20px 0 0;
 		color: ${(props) => props.theme.blue};
 	}
 `;

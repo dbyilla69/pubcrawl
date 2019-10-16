@@ -67,6 +67,10 @@ export const ALL_VIDEOS_QUERY = gql`
 					parent_channel_id
 					is_reports_visible
 				}
+				metaData {
+					name
+					value
+				}
 			}
 		}
 	}
@@ -131,6 +135,10 @@ export const VIDEOS_WHERE_URL_QUERY = gql`
 				display_ads_prob
 				is_reports_visible
 			}
+			metaData {
+        name
+        value
+      }
 		}
 	}
 `;
@@ -194,6 +202,10 @@ export const VIDEO_WHERE_ID_QUERY = gql`
 				display_ads_prob
 				is_reports_visible
 			}
+			metaData {
+        name
+        value
+      }
 		}
 	}
 `;
