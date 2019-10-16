@@ -1,38 +1,45 @@
+/* eslint-disable no-param-reassign */
 // ? 1. takes in the overall data object from which it is filtering
 // ? 2. take in the level at which it is filtering (ex. 'crawlerAuditData')
 // ? 3. iterates over the filters entries and creates a new object with only the desired data
-const makeVideoReducer = data => level => (videoData, [property, active]) => {
+
+const makeVideoReducer = (data) => (level) => (videoData, [property, active]) => {
 	if (level) {
-		if (active) videoData[property] = data[level][property]
-		return videoData
+		if (active) {
+			videoData[property] = data[level][property];
+		}
+
+		return videoData;
 	}
 
-	if (active) videoData[property] = data[property]
-	return videoData
-}
+	if (active) {
+		videoData[property] = data[property];
+	}
+
+	return videoData;
+};
 
 export const applyFilters = ({ video, filters }) => {
 	// extract each section of the filters
-	const trcVideosFilters = { ...filters.trcVideosData }
-	const crawlerAuditFilters = { ...filters.crawlerAuditData }
-	const crawlerInstructionsFilters = { ...filters.crawlerInstructionsData }
-	const channelsFilters = { ...filters.channelsData }
+	const trcVideosFilters = { ...filters.trcVideosData };
+	const crawlerAuditFilters = { ...filters.crawlerAuditData };
+	const crawlerInstructionsFilters = { ...filters.crawlerInstructionsData };
+	const channelsFilters = { ...filters.channelsData };
 
 	const trcVideosData = Object.entries(trcVideosFilters).reduce(
 		makeVideoReducer(video)(),
-		{}
-	)
+		{},
+	);
 	const crawlerAuditData = Object.entries(crawlerAuditFilters).reduce(
 		makeVideoReducer(video)('crawlerAuditData'),
-		{}
-	)
+		{},
+	);
 	const crawlerInstructionsData = Object.entries(
-		crawlerInstructionsFilters
-	).reduce(makeVideoReducer(video)('crawlerInstructionsData'), {})
+		crawlerInstructionsFilters,
+	).reduce(makeVideoReducer(video)('crawlerInstructionsData'), {});
 
-	const channelsData = video.channelsData.map(videoChannel =>
-		Object.entries(channelsFilters).reduce(makeVideoReducer(videoChannel)(), {})
-	)
+	const channelsData = video.channelsData
+		.map((videoChannel) => Object.entries(channelsFilters).reduce(makeVideoReducer(videoChannel)(), {}));
 
 	const filteredVideo = {
 		...trcVideosData,
@@ -41,12 +48,12 @@ export const applyFilters = ({ video, filters }) => {
 		},
 		crawlerInstructionsData: { ...crawlerInstructionsData },
 		channelsData: [...channelsData],
-	}
+	};
 
-	return filteredVideo
-}
+	return filteredVideo;
+};
 
-export const nestedProperties = ['crawlerAuditData', 'crawlerInstructionsData']
+export const nestedProperties = ['crawlerAuditData', 'crawlerInstructionsData'];
 
 export const defaultFilters = {
 	trcVideosData: {
@@ -98,4 +105,4 @@ export const defaultFilters = {
 		display_ads_prob: false,
 		is_reports_visible: false,
 	},
-}
+};

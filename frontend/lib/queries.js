@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export const ALL_VIDEOS_QUERY = gql`
 	query ALL_VIDEOS_QUERY(
@@ -70,7 +70,7 @@ export const ALL_VIDEOS_QUERY = gql`
 			}
 		}
 	}
-`
+`;
 
 export const VIDEOS_WHERE_URL_QUERY = gql`
 	query VIDEOS_WHERE_URL_QUERY(
@@ -133,7 +133,7 @@ export const VIDEOS_WHERE_URL_QUERY = gql`
 			}
 		}
 	}
-`
+`;
 
 export const VIDEO_WHERE_ID_QUERY = gql`
 	query VIDEO_WHERE_ID_QUERY(
@@ -196,4 +196,4 @@ export const VIDEO_WHERE_ID_QUERY = gql`
 			}
 		}
 	}
-`
+`;
