@@ -1,12 +1,12 @@
-import styled from 'styled-components'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import styled from 'styled-components';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default (props) => {
-	const router = useRouter()
-	const { id, name } = router.query
-	const currentPage = parseInt(router.query.page, 10) || 1
-	const { totalPages, hasNextPage } = props.data
+	const router = useRouter();
+	const { id, name } = router.query;
+	const currentPage = parseInt(router.query.page, 10) || 1;
+	const { totalPages, hasNextPage } = props.data;
 
 	const showPrevPageLinks = () => {
 		if (currentPage <= 1) {
@@ -14,7 +14,7 @@ export default (props) => {
 				<>
 					<span>First Page</span>|<span>Prev</span>|
 				</>
-			)
+			);
 		}
 
 		return (
@@ -28,8 +28,8 @@ export default (props) => {
 				</Link>
 				|
 			</>
-		)
-	}
+		);
+	};
 
 	const showNextPageLinks = () => {
 		if (!hasNextPage) {
@@ -37,7 +37,7 @@ export default (props) => {
 				<>
 					|<span>Next</span>|<span>Last Page ({totalPages})</span>
 				</>
-			)
+			);
 		}
 
 		return (
@@ -51,8 +51,8 @@ export default (props) => {
 					<a>Last Page ({totalPages})</a>
 				</Link>
 			</>
-		)
-	}
+		);
+	};
 
 	return (
 		<PaginationStyles top={props.top}>
@@ -62,8 +62,8 @@ export default (props) => {
 			</span>
 			{showNextPageLinks()}
 		</PaginationStyles>
-	)
-}
+	);
+};
 
 const PaginationStyles = styled.div`
 	position: absolute;
@@ -87,4 +87,4 @@ const PaginationStyles = styled.div`
 	span {
 		width: 180px;
 	}
-`
+`;

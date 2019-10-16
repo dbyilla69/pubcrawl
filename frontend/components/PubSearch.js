@@ -1,9 +1,11 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-export default props => {
-	const { searchType, setSearchType, onChange, client } = props
+export default (props) => {
+	const {
+		searchType, setSearchType, onChange, client,
+	} = props;
 	return (
-		<Form onSubmit={e => e.preventDefault()}>
+		<Form onSubmit={(e) => e.preventDefault()}>
 			<fieldset>
 				<SearchType>
 					<span>SEARCH BY:</span>
@@ -15,7 +17,7 @@ export default props => {
 							type="radio"
 							value="name"
 							checked={searchType === 'name'}
-							onChange={e => setSearchType(e.target.value)}
+							onChange={(e) => setSearchType(e.target.value)}
 						/>
 					</label>
 					<label
@@ -29,7 +31,7 @@ export default props => {
 							type="radio"
 							value="description"
 							checked={searchType === 'description'}
-							onChange={e => setSearchType(e.target.value)}
+							onChange={(e) => setSearchType(e.target.value)}
 						/>
 					</label>
 					<label htmlFor="id-input" className={searchType === 'id' ? 'active' : ''}>
@@ -40,26 +42,28 @@ export default props => {
 							type="radio"
 							value="id"
 							checked={searchType === 'id'}
-							onChange={e => setSearchType(e.target.value)}
+							onChange={(e) => setSearchType(e.target.value)}
 						/>
 					</label>
 				</SearchType>
 				<label htmlFor="search">
-					<TextInput
+					<input
+						className="search-input"
 						name="search"
-                        type="text"
-                        placeholder="Search for a publisher"
-						onChange={e => {
-							e.persist()
-							onChange(e, client)
+						id="search"
+						type="text"
+						placeholder="Search for a publisher"
+						onChange={(e) => {
+							e.persist();
+							onChange(e, client);
 						}}
-					></TextInput>
+					/>
 					<BeerMug />
 				</label>
 			</fieldset>
 		</Form>
-	)
-}
+	);
+};
 
 const Form = styled.form`
     max-width: 800px;
@@ -73,48 +77,49 @@ const Form = styled.form`
     label[for="search"] {
         grid-row-start: 2;
     }
-`
+
+		.search-input {
+			width: calc(100% - 55px + 1rem);
+			font-size: 2rem;
+			line-height: 2;
+			border: 2px solid black;
+			border-radius: 5px;
+			padding: 0 10px;
+		}
+`;
 
 const SearchType = styled.div`
 	text-align: center;
 	margin: 0 10px 20px;
-    grid-row-start: 1;
+	grid-row-start: 1;
 
-    span {
-        font-weight: bold;
-    }
+	span {
+			font-weight: bold;
+	}
 
 	label {
 		padding: 5px 0;
 		margin: 0 10px;
 
-        &:hover {
-            cursor: pointer;
-        }
+		&:hover {
+				cursor: pointer;
+		}
 
 		&.active {
-			color: ${props => props.theme.blue};
-			border-bottom: 1px solid ${props => props.theme.grey};
+			color: ${(props) => props.theme.blue};
+			border-bottom: 1px solid ${(props) => props.theme.grey};
 		}
 	}
-`
+`;
 
-const TextInput = styled.input`
-	width: calc(100% - 55px + 1rem);
-	font-size: 2rem;
-    line-height: 2;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 0 10px;
-`
 
 const BeerMug = styled.div`
-    float: right;
-    margin: 1rem;
+	float: right;
+	margin: 1rem;
 	background-image: url('//cdn.taboola.com/static/impl/png/beer-mug-transparent.png');
 	height: 25px;
 	width: 25px;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-`
+`;

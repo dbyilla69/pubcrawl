@@ -16,5 +16,6 @@
 	"peacock.color": "#00b3e6",
 	"prettier.useTabs": true,
 	"editor.formatOnPaste": true,
-	"editor.formatOnSave": true
+	"editor.formatOnSave": true,
+	"prettier.tabWidth": 4
 }

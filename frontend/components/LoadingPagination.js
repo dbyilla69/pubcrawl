@@ -1,10 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export default (props) => (
 	<PaginationStyles top={props.top}>
-		<span>First Page</span>|<span>Prev</span><span>Page 1 of ?</span>|<span>Next</span>|<span>Last Page ?</span>
+		<span>First Page</span>|<span>Prev</span>|
+		<span>Page 1 of ?</span>|
+		<span>Next</span>|<span>Last Page ?</span>
 	</PaginationStyles>
-)
+);
 
 const PaginationStyles = styled.div`
 	position: absolute;
@@ -23,4 +25,4 @@ const PaginationStyles = styled.div`
 	span {
 		width: 180px;
 	}
-`
+`;

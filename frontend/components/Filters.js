@@ -1,9 +1,9 @@
-import styled from 'styled-components'
-import { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import VideoSearch from './VideoSearch'
-import makeCheckBoxes from '../lib/makeCheckBoxes'
+import styled from 'styled-components';
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import VideoSearch from './VideoSearch';
+import makeCheckBoxes from '../lib/makeCheckBoxes';
 
 export default ({
 	filters,
@@ -12,18 +12,18 @@ export default ({
 	recommendableFilter,
 	disabledFields,
 }) => {
-	const router = useRouter()
-	const { id, name } = router.query
-	const [recommendableActive, setRecommendableActive] = useState(false)
-	const [videosActive, setVideosActive] = useState(false)
-	const [auditActive, setAuditActive] = useState(false)
-	const [instructionsActive, setInstructionsActive] = useState(false)
-	const [channelsActive, setChannelsActive] = useState(false)
-	const checkboxes = makeCheckBoxes({ filters, setFilters })
+	const router = useRouter();
+	const { id, name } = router.query;
+	const [recommendableActive, setRecommendableActive] = useState(false);
+	const [videosActive, setVideosActive] = useState(false);
+	const [auditActive, setAuditActive] = useState(false);
+	const [instructionsActive, setInstructionsActive] = useState(false);
+	const [channelsActive, setChannelsActive] = useState(false);
+	const checkboxes = makeCheckBoxes({ filters, setFilters });
 	const handleRecChange = (e) => {
-		router.replace(`/videos?id=${id}&name=${name}&page=1`)
-		setRecommendableFilter(e.target.value)
-	}
+		router.replace(`/videos?id=${id}&name=${name}&page=1`);
+		setRecommendableFilter(e.target.value);
+	};
 
 	return (
 		<Container>
@@ -40,10 +40,8 @@ export default ({
 					<>
 						<FilterHeader
 							tabIndex={0}
-							onClick={(e) => setRecommendableActive(!recommendableActive)}
-							onKeyPress={(e) =>
-								e.which === 13 && setRecommendableActive(!recommendableActive)
-							}
+							onClick={() => setRecommendableActive(!recommendableActive)}
+							onKeyPress={(e) => e.which === 13 && setRecommendableActive(!recommendableActive)}
 						>
 							Recommendable?
 						</FilterHeader>
@@ -90,7 +88,7 @@ export default ({
 				)}
 				<FilterHeader
 					tabIndex={0}
-					onClick={(e) => setVideosActive(!videosActive)}
+					onClick={() => setVideosActive(!videosActive)}
 					onKeyPress={(e) => e.which === 13 && setVideosActive(!videosActive)}
 				>
 					trc.videos
@@ -100,7 +98,7 @@ export default ({
 				</FieldSetStyles>
 				<FilterHeader
 					tabIndex={0}
-					onClick={(e) => setAuditActive(!auditActive)}
+					onClick={() => setAuditActive(!auditActive)}
 					onKeyPress={(e) => e.which === 13 && setAuditActive(!auditActive)}
 				>
 					crawler.audit
@@ -110,7 +108,7 @@ export default ({
 				</FieldSetStyles>
 				<FilterHeader
 					tabIndex={0}
-					onClick={(e) => setInstructionsActive(!instructionsActive)}
+					onClick={() => setInstructionsActive(!instructionsActive)}
 					onKeyPress={(e) => e.which === 13 && setInstructionsActive(!instructionsActive)}
 				>
 					crawler.instructions
@@ -120,7 +118,7 @@ export default ({
 				</FieldSetStyles>
 				<FilterHeader
 					tabIndex={0}
-					onClick={(e) => setChannelsActive(!channelsActive)}
+					onClick={() => setChannelsActive(!channelsActive)}
 					onKeyPress={(e) => e.which === 13 && setChannelsActive(!channelsActive)}
 				>
 					channels
@@ -130,8 +128,8 @@ export default ({
 				</FieldSetStyles>
 			</Form>
 		</Container>
-	)
-}
+	);
+};
 
 const Container = styled.div`
 	border-right: 3px solid ${(props) => props.theme.blue};
@@ -146,21 +144,21 @@ const Container = styled.div`
 		margin-bottom: 0;
 		color: ${(props) => props.theme.blue};
 	}
-`
+`;
 
 const Form = styled.form`
 	fieldset {
 		display: grid;
 		grid-template-columns: 1fr;
 	}
-`
+`;
 
 const FilterHeader = styled.h2`
 	margin: 5px 0;
 	&:hover {
 		cursor: pointer;
 	}
-`
+`;
 
 const FieldSetStyles = styled.fieldset`
 	opacity: 0;
@@ -172,8 +170,8 @@ const FieldSetStyles = styled.fieldset`
 		opacity: 1;
 		max-height: 100vh;
 	}
-`
+`;
 
 const LinkStyles = styled.div`
 	font-weight: 700;
-`
+`;

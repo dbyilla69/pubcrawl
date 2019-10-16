@@ -1,27 +1,11 @@
 import styled from 'styled-components';
 import { nestedProperties } from '../lib/videoFilters';
-
-const makeCell = (function() {
-	let counter = 0;
-	return ({ key, value }) => {
-		counter += 1;
-		const isEven = counter % 2 === 0;
-
-		return (
-			<div
-				className={isEven ? `cell even` : `cell odd`}
-				key={`${key}:${value}${Math.floor(Math.random() * 100)}`}
-			>
-				<span className="key">{key}:</span>
-				<span>{value ? value.toString() : '(null)'}</span>
-			</div>
-		);
-	};
-})();
+import makeCellComponent from './VideoDataCellHOC';
 
 export default (props) => {
 	const mappedVids = props.videos.map((video, idx) => {
 		const isEven = idx % 2 === 0;
+		const Cell = makeCellComponent();
 		return (
 			<VideoResult
 				key={Math.floor(Math.random() * 1000000)}
@@ -30,31 +14,34 @@ export default (props) => {
 				{Object.keys(video).map((property) => {
 					if (property === 'channelsData') {
 						// a check to see if there are any channels with active filters
-						const numChannels = Object.keys(video.channelsData[0] || {}).length;
+						const numChannels = Object.keys(
+							video.channelsData[0] || {},
+						).length;
 
 						// if not, return nothing
 						if (numChannels === 0) return null;
 
-						const channelContainer = video.channelsData.map((channel, channelIdx) => {
-							const channelIsEven = channelIdx % 2 === 0;
-							const channelCells = Object.keys(channel).map((key) => {
-								return makeCell({
-									key,
-									value: channel[key],
-								});
-							});
+						const channelContainer = video.channelsData.map(
+							(channel, channelIdx) => {
+								const channelIsEven = channelIdx % 2 === 0;
+								const channelCells = Object.keys(channel).map(
+									(key) => (<Cell displayKey={key} key={`${key}-${channel[key]}`} value={channel[key]} />),
+								);
 
-							if (!channelCells.length) return;
+								if (!channelCells.length) return;
 
-							return (
-								<ChannelContainer
-									key={Math.floor(Math.random() * 10000)}
-									className={channelIsEven ? 'even' : 'odd'}
-								>
-									{channelCells}
-								</ChannelContainer>
-							);
-						});
+								return (
+									<ChannelContainer
+										key={Math.floor(Math.random() * 10000)}
+										className={
+											channelIsEven ? 'even' : 'odd'
+										}
+									>
+										{channelCells}
+									</ChannelContainer>
+								);
+							},
+						);
 
 						return (
 							<div key={Math.floor(Math.random() * 10000)}>
@@ -65,18 +52,13 @@ export default (props) => {
 					}
 
 					if (nestedProperties.includes(property)) {
-						return Object.keys(video[property]).map((nestedProp) => {
-							return makeCell({
-								key: nestedProp,
-								value: video[property][nestedProp],
-							});
-						});
+						return Object.keys(video[property])
+							.map((nestedProp) => (
+								<Cell key={`${nestedProp}-${video[property][nestedProp]}`} displayKey={nestedProp} value={video[property][nestedProp]} />
+							));
 					}
 
-					return makeCell({
-						key: property,
-						value: video[property],
-					});
+					return <Cell key={`${property}-${video[property]}`} displayKey={property} value={video[property]} />;
 				})}
 			</VideoResult>
 		);

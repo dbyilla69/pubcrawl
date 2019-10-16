@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export default () => (
 	<LoadingStyles>
@@ -19,7 +19,7 @@ export default () => (
 			</div>
 		</div>
 	</LoadingStyles>
-)
+);
 
 const LoadingStyles = styled.div`
 	#wrapper {
@@ -104,24 +104,24 @@ const LoadingStyles = styled.div`
 	}
 	@-webkit-keyframes color {
 		0% {
-			stroke: ${props => props.theme.lightblue};
+			stroke: ${(props) => props.theme.lightblue};
 		}
 		50% {
-			stroke: ${props => props.theme.yellow};
+			stroke: ${(props) => props.theme.yellow};
 		}
 		100% {
-			stroke: ${props => props.theme.lightblue};
+			stroke: ${(props) => props.theme.lightblue};
 		}
 	}
 	@keyframes color {
 		0% {
-			stroke: ${props => props.theme.lightblue};
+			stroke: ${(props) => props.theme.lightblue};
 		}
 		50% {
-			stroke: ${props => props.theme.yellow};
+			stroke: ${(props) => props.theme.yellow};
 		}
 		100% {
-			stroke: ${props => props.theme.lightblue};
+			stroke: ${(props) => props.theme.lightblue};
 		}
 	}
-`
+`;

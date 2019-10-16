@@ -1,21 +1,20 @@
-import styled from 'styled-components'
-import Link from 'next/link'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import styled from 'styled-components';
+import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default () => {
-	const router = useRouter()
+	const router = useRouter();
 	const [search, setSearch] = useState({
 		video_url: '',
 		video_id: '',
-	})
-	const handleChange = e =>
-		setSearch({ ...search, [e.target.name]: e.target.value })
+	});
+	const handleChange = (e) => setSearch({ ...search, [e.target.name]: e.target.value });
 
 	const handleSubmit = (e, searchType) => {
-		e.preventDefault()
-		const { id, name } = router.query
-		const searchQuery = search[searchType]
+		e.preventDefault();
+		const { id, name } = router.query;
+		const searchQuery = search[searchType];
 		router.push({
 			pathname: '/videos/search',
 			query: {
@@ -24,13 +23,13 @@ export default () => {
 				searchQuery,
 				searchType,
 			},
-		})
-	}
+		});
+	};
 
 	return (
 		<>
 			<h1>Search</h1>
-			<Form onSubmit={e => handleSubmit(e, 'video_id')}>
+			<Form onSubmit={(e) => handleSubmit(e, 'video_id')}>
 				<label htmlFor="video_id-input">
 					<span>By ID</span>
 					<input
@@ -39,11 +38,11 @@ export default () => {
 						placeholder="Search by trc.videos.id"
 						name="video_id"
 						onChange={handleChange}
-					></input>
+					/>
 				</label>
 				<button type="submit">Go ▷</button>
 			</Form>
-			<Form onSubmit={e => handleSubmit(e, 'video_url')}>
+			<Form onSubmit={(e) => handleSubmit(e, 'video_url')}>
 				<label htmlFor="video_url-input">
 					<span>By Url</span>
 					<input
@@ -52,7 +51,7 @@ export default () => {
 						placeholder="Search by URL"
 						name="video_url"
 						onChange={handleChange}
-					></input>
+					/>
 				</label>
 				<button type="submit">Go ▷</button>
 			</Form>
@@ -62,8 +61,8 @@ export default () => {
 				</Link>
 			)}
 		</>
-	)
-}
+	);
+};
 
 const Form = styled.form`
 	span {
@@ -86,8 +85,8 @@ const Form = styled.form`
 		line-height: 1.5;
 		letter-spacing: 0.5px;
 		background: transparent;
-		color: ${props => props.theme.darkblue};
+		color: ${(props) => props.theme.darkblue};
 		border: none;
 		cursor: pointer;
 	}
-`
+`;
