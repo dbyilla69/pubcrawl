@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { nestedProperties } from '../lib/videoFilters';
 import makeCellComponent from './VideoDataCellHOC';
 
+/**
+ * TODO: break out each dataset into its
+ * TODO: own component so we can separate out some of this logic
+ */
+
 export default (props) => {
 	const mappedVids = props.videos.map((video, idx) => {
 		const isEven = idx % 2 === 0;
@@ -12,6 +17,7 @@ export default (props) => {
 				className={isEven ? 'even' : 'odd'}
 			>
 				{Object.keys(video).map((property) => {
+					// we have to handle channels differently because of their data structure
 					if (property === 'channelsData') {
 						// a check to see if there are any channels with active filters
 						const numChannels = Object.keys(
