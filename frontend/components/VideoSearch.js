@@ -40,7 +40,7 @@ export default () => {
 						onChange={handleChange}
 					/>
 				</label>
-				<button type="submit">Go ▷</button>
+				<button type="submit" disabled={search.video_id.length < 5}>Go ▷</button>
 			</Form>
 			<Form onSubmit={(e) => handleSubmit(e, 'video_url')}>
 				<label htmlFor="video_url-input">
@@ -53,7 +53,7 @@ export default () => {
 						onChange={handleChange}
 					/>
 				</label>
-				<button type="submit">Go ▷</button>
+				<button type="submit" disabled={search.video_url.length < 15}>Go ▷</button>
 			</Form>
 			{router.query.searchQuery && (
 				<Link href={`/videos?id=${router.query.id}&name=${router.query.name}`}>
@@ -88,5 +88,9 @@ const Form = styled.form`
 		color: ${(props) => props.theme.darkblue};
 		border: none;
 		cursor: pointer;
+
+		&[disabled] {
+			color: grey;
+		}
 	}
 `;
