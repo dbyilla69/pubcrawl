@@ -22,6 +22,7 @@ export default () => (
 );
 
 const LoadingStyles = styled.div`
+	min-height: 100vh;
 	#wrapper {
 		position: relative;
 	}

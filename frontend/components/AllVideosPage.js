@@ -14,8 +14,11 @@ export default (props) => {
 	const { id, name } = props.publisher;
 	const [filters, setFilters] = useState(defaultFilters);
 	const [recommendableFilter, setRecommendableFilter] = useState('BOTH');
+	const [reloading, setReloading] = useState(false);
 
-	const { data, error, loading } = useQuery(ALL_VIDEOS_QUERY, {
+	const {
+		data, error, loading, refetch,
+	} = useQuery(ALL_VIDEOS_QUERY, {
 		variables: {
 			publisher_id: parseInt(id, 10),
 			publisher_name: name,
@@ -27,7 +30,7 @@ export default (props) => {
 	const paginationData = data && data.allVideos.pageInfo;
 
 	const statusSwitch = () => {
-		if (loading) return <Loading />;
+		if (loading || reloading) return <Loading />;
 		if (error) return <Error error={error} />;
 
 		const noResults = data.allVideos.pageInfo.totalPages === 0;
@@ -51,12 +54,29 @@ export default (props) => {
 			<div style={{ minHeight: '80vh', position: 'relative' }}>
 				{
 					paginationData
-					&& <Pagination top paginationData={paginationData} loading={loading} page={props.page} />
+					&& (
+						<TopContainer>
+							<div>
+								<Pagination paginationData={paginationData} loading={loading} page={props.page} />
+							</div>
+							<button
+								id="refresh-button"
+								type="button"
+								onClick={async () => {
+									setReloading(true);
+									await refetch();
+									setReloading(false);
+								}}
+							>
+									Refresh Results &#8635;
+							</button>
+						</TopContainer>
+					)
 				}
 				{ statusSwitch() }
 				{
 					paginationData
-					&& <Pagination top={false} paginationData={paginationData} loading={loading} page={props.page} />
+					&& <Pagination paginationData={paginationData} loading={loading} page={props.page} />
 				}
 			</div>
 		</Layout>
@@ -67,4 +87,19 @@ const Layout = styled.main`
 	display: grid;
 	grid-template-columns: 1fr 4fr;
 	grid-column-gap: 50px;
+
+	#refresh-button {
+		font-size: 1.6rem;
+		padding: 5px;
+		background: transparent;
+		color: ${(props) => props.theme.blue};
+		font-weight: 500;
+		border: none;
+		border-radius: 5px;
+	}
+`;
+
+const TopContainer = styled.div`
+	display: flex;
+	justify-content: space-around;
 `;

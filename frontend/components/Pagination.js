@@ -55,7 +55,7 @@ export default (props) => {
 	};
 
 	return (
-		<PaginationStyles top={props.top}>
+		<PaginationStyles>
 			{showPrevPageLinks()}
 			<span>
 				Page {currentPage} of {totalPages}
@@ -66,10 +66,6 @@ export default (props) => {
 };
 
 const PaginationStyles = styled.div`
-	position: absolute;
-	left: calc(50% - 400px);
-	top: ${(props) => (props.top ? 0 : null)};
-	bottom: ${(props) => (props.top ? null : 0)};
 	font-size: 1.6rem;
 	font-weight: 500;
 	display: flex;
