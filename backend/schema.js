@@ -24,9 +24,18 @@ module.exports = gql`
 		): [Video]
 	}
 
+	type Mutation {
+		recrawl(publisher_name: String!, pub_item_id: String!): RecrawlResponse!
+	}
+
+	type RecrawlResponse {
+		message: String!
+		pub_item_id: String!
+	}
+
 	scalar DateTime
 
-	type Video @cacheControl(maxAge: 120) {
+	type Video {
 		publisher: String
 		id: ID!
 		publisher_id: ID!
@@ -52,7 +61,7 @@ module.exports = gql`
 		metaData: [Metadatum]
 	}
 
-	type Channel @cacheControl(maxAge: 120) {
+	type Channel {
 		id: ID
 		publisher_id: Int
 		parent_channel: String
@@ -68,7 +77,7 @@ module.exports = gql`
 		value: String
 	}
 
-	type CrawlerAuditData @cacheControl(maxAge: 120) {
+	type CrawlerAuditData {
 		id: ID!
 		publisher: String
 		pub_item_id: String
@@ -83,7 +92,7 @@ module.exports = gql`
 		first_nonrecommendable_time: DateTime
 	}
 
-	type CrawlerInstructionsData @cacheControl(maxAge: 120) {
+	type CrawlerInstructionsData {
 		id: ID!
 		lock_id: String
 		lock_time: DateTime
@@ -93,7 +102,7 @@ module.exports = gql`
 		next_crawl_reason: Int
 	}
 
-	type PublisherConfig @cacheControl(maxAge: 0) {
+	type PublisherConfig {
 		id: ID!
 		publisher_id: ID!
 		attribute: String

@@ -5,8 +5,9 @@ const db = require('./db/index');
 const typeDefs = require('./schema');
 const Query = require('./resolvers/Query');
 const Video = require('./resolvers/Video');
+const Mutation = require('./resolvers/Mutation');
 
-const resolvers = { Query, Video };
+const resolvers = { Query, Video, Mutation };
 
 const server = new ApolloServer({
 	typeDefs,

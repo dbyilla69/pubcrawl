@@ -173,4 +173,21 @@ module.exports = {
 			return error;
 		}
 	},
+
+	async recrawl(pubName, pubItemId) {
+		try {
+			const success = await db.query(
+				`UPDATE crawler.instructions
+				SET instructions.next_crawl=now(), instructions.video_status=1
+				WHERE publisher = ? and pub_item_id = ?;`,
+				[pubName, pubItemId],
+			);
+
+			if (success.fatal) throw new Error('PubCrawlDB response failed');
+
+			return success;
+		} catch (error) {
+			return error;
+		}
+	},
 };
