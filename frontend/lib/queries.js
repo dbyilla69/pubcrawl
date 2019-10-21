@@ -21,6 +21,7 @@ export const ALL_VIDEOS_QUERY = gql`
 				id
 				title
 				url
+				publisher
 				thumbnail_url
 				pub_video_id
 				uploader
@@ -35,6 +36,7 @@ export const ALL_VIDEOS_QUERY = gql`
 				update_time
 				start_date
 				create_time
+				publisher_id
 				crawlerAuditData {
 					id
 					publisher

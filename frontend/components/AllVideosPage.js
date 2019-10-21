@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
-import Videos from './Videos';
+import Videos from './videos/Videos';
 import Filters from './Filters';
 import Pagination from './PaginationSwitch';
 import Error from './Error';
@@ -38,7 +38,7 @@ export default (props) => {
 		if (noResults) return <NoResults />;
 
 		const mappedVideoData = data.allVideos.edges.map((video) => applyFilters({ video, filters }));
-		return <Videos videos={mappedVideoData} />;
+		return <Videos videos={mappedVideoData} filters={filters} />;
 	};
 
 
@@ -56,7 +56,7 @@ export default (props) => {
 					paginationData
 					&& (
 						<TopContainer>
-							<div>
+							<div style={{ minWidth: '800px' }}>
 								<Pagination paginationData={paginationData} loading={loading} page={props.page} />
 							</div>
 							<button

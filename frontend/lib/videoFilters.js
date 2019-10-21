@@ -44,13 +44,22 @@ export const applyFilters = ({ video, filters }) => {
 	const metaData = filters.metaData ? video.metaData : null;
 
 	const filteredVideo = {
+		channelsData,
+		metaData,
 		...trcVideosData,
 		crawlerAuditData: {
 			...crawlerAuditData,
 		},
 		crawlerInstructionsData: { ...crawlerInstructionsData },
-		channelsData,
-		metaData,
+		recrawlData: {
+			pub_item_id: video.pub_video_id,
+			publisher_name: video.publisher,
+		},
+		refetchData: {
+			publisher_id: Number(video.publisher_id),
+			video_id: video.id,
+			publisher_name: video.publisher,
+		},
 	};
 
 	return filteredVideo;

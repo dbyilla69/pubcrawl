@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
-import Videos from './Videos';
+import Videos from './videos/Videos';
 import Filters from './Filters';
 import Error from './Error';
 import Loading from './Loading';
