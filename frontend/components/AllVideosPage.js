@@ -14,10 +14,9 @@ export default (props) => {
 	const { id, name } = props.publisher;
 	const [filters, setFilters] = useState(defaultFilters);
 	const [recommendableFilter, setRecommendableFilter] = useState('BOTH');
-	const [reloading, setReloading] = useState(false);
 
 	const {
-		data, error, loading, refetch,
+		data, error, loading, refetch, networkStatus,
 	} = useQuery(ALL_VIDEOS_QUERY, {
 		variables: {
 			publisher_id: parseInt(id, 10),
@@ -25,12 +24,13 @@ export default (props) => {
 			recommendable_filter: recommendableFilter,
 			page: props.page || 1,
 		},
+		notifyOnNetworkStatusChange: true,
 	});
 
 	const paginationData = data && data.allVideos.pageInfo;
 
 	const statusSwitch = () => {
-		if (loading || reloading) return <Loading />;
+		if (loading || networkStatus === 4) return <Loading />;
 		if (error) return <Error error={error} />;
 
 		const noResults = data.allVideos.pageInfo.totalPages === 0;
@@ -62,11 +62,7 @@ export default (props) => {
 							<button
 								id="refresh-button"
 								type="button"
-								onClick={async () => {
-									setReloading(true);
-									await refetch();
-									setReloading(false);
-								}}
+								onClick={() => refetch()}
 							>
 									Refresh Results &#8635;
 							</button>
