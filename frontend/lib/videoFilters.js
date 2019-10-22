@@ -6,7 +6,11 @@
 const makeVideoReducer = (data) => (level) => (videoData, [property, active]) => {
 	if (level) {
 		if (active) {
-			videoData[property] = data[level][property];
+			if (data[level]) {
+				videoData[property] = data[level][property];
+			} else {
+				videoData[property] = 'null';
+			}
 		}
 
 		return videoData;
