@@ -93,6 +93,7 @@ export const VIDEOS_WHERE_URL_QUERY = gql`
 			title
 			url
 			thumbnail_url
+			publisher
 			publisher_id
 			pub_video_id
 			uploader
@@ -160,6 +161,7 @@ export const VIDEO_WHERE_ID_QUERY = gql`
 			title
 			url
 			thumbnail_url
+			publisher
 			publisher_id
 			pub_video_id
 			uploader

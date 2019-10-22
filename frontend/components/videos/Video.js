@@ -2,7 +2,6 @@ import { useMutation } from '@apollo/react-hooks';
 import styled from 'styled-components';
 import makeCellComponent from './VideoDataCellHOC';
 import VideoData from './VideoData';
-import Error from '../Error';
 import RECRAWL_MUTATION from '../../lib/mutations';
 
 export default ({ video, idx }) => {

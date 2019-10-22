@@ -1,7 +1,9 @@
-import VideosSearchResults from '../../components/VideosSearchResults'
+import VideosSearchResults from '../../components/VideosSearchResults';
 
-export default props => {
-	const { name, id, searchType, searchQuery } = props.query
+export default (props) => {
+	const {
+		name, id, searchType, searchQuery,
+	} = props.query;
 
 	return (
 		<VideosSearchResults
@@ -9,5 +11,5 @@ export default props => {
 			searchQuery={searchQuery}
 			searchType={searchType}
 		/>
-	)
-}
+	);
+};
