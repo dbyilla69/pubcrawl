@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
 import Videos from './videos/Videos';
@@ -38,7 +38,7 @@ export default (props) => {
 		if (noResults) return <NoResults />;
 
 		const mappedVideoData = data.allVideos.edges.map((video) => applyFilters({ video, filters }));
-		return <Videos videos={mappedVideoData} filters={filters} />;
+		return <Videos videos={mappedVideoData} />;
 	};
 
 

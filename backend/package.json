@@ -14,7 +14,8 @@
 		"dataloader": "^1.4.0",
 		"dotenv": "^8.1.0",
 		"graphql-import": "^0.7.1",
-		"mysql": "^2.17.1"
+		"mysql": "^2.17.1",
+		"waait": "^1.0.5"
 	},
 	"devDependencies": {
 		"eslint": "^6.5.1",

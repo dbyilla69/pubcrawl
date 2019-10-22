@@ -149,7 +149,7 @@ export const VIDEO_WHERE_ID_QUERY = gql`
 	query VIDEO_WHERE_ID_QUERY(
 		$publisher_id: Int!
 		$publisher_name: String!
-		$video_id: String!
+		$video_id: ID!
 	) {
 		videoWhereId(
 			publisher_id: $publisher_id

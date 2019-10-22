@@ -54,11 +54,8 @@ export const applyFilters = ({ video, filters }) => {
 		recrawlData: {
 			pub_item_id: video.pub_video_id,
 			publisher_name: video.publisher,
-		},
-		refetchData: {
 			publisher_id: Number(video.publisher_id),
 			video_id: video.id,
-			publisher_name: video.publisher,
 		},
 	};
 

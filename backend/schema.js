@@ -13,7 +13,7 @@ module.exports = gql`
 			recommendable_filter: RecommendableFilter
 		): AllVideosType
 		videoWhereId(
-			video_id: String!
+			video_id: ID!
 			publisher_id: Int!
 			publisher_name: String!
 		): Video
@@ -25,12 +25,7 @@ module.exports = gql`
 	}
 
 	type Mutation {
-		recrawl(publisher_name: String!, pub_item_id: String!): RecrawlResponse!
-	}
-
-	type RecrawlResponse {
-		message: String!
-		pub_item_id: String!
+		recrawl(publisher_name: String!, pub_item_id: String!, video_id: ID!, publisher_id: Int!): Video!
 	}
 
 	scalar DateTime

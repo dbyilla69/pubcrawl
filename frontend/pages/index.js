@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
 import PubSearch from '../components/PubSearch';
 import PubList from '../components/PubList';
+import Error from '../components/Error';
 import Loading from '../components/Loading';
 import NoResults from '../components/NoResults';
 
@@ -20,24 +21,32 @@ export const ALL_PUBLISHERS_QUERY = gql`
 export default () => {
 	const [searchType, setSearchType] = useState('name');
 	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 	const [pubs, setPubs] = useState([]);
 	const [initialLoad, setInitialLoad] = useState(true);
 
 	const onChange = debounce(async (e, client) => {
-		if (e.target.value.length < 3) return setPubs([]);
+		try {
+			setError(null);
+			if (e.target.value.length < 3) return setPubs([]);
 
-		setLoading(true);
+			setLoading(true);
 
-		if (initialLoad) {
-			setInitialLoad(false);
+			if (initialLoad) {
+				setInitialLoad(false);
+			}
+
+			const resp = await client.query({
+				query: ALL_PUBLISHERS_QUERY,
+				variables: { [searchType]: e.target.value },
+			});
+
+			setPubs(resp.data.allPublishers);
+			setLoading(false);
+		} catch (e) {
+			setError(e);
+			setLoading(false);
 		}
-		const resp = await client.query({
-			query: ALL_PUBLISHERS_QUERY,
-			variables: { [searchType]: e.target.value },
-		});
-
-		setPubs(resp.data.allPublishers);
-		setLoading(false);
 	}, 200);
 
 	return (
@@ -50,7 +59,9 @@ export default () => {
 							setSearchType={setSearchType}
 							searchType={searchType}
 							client={client}
+							setError={setError}
 						/>
+						{error && <Error error={error} />}
 						{loading && <Loading />}
 						{!loading && !initialLoad && !pubs.length ? <NoResults /> : null}
 						{!loading && <PubList pubs={pubs} />}
