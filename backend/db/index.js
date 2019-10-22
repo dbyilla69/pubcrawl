@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const util = require('util');
 
 const poolConfig = {
-	connectionLimit: 20,
+	connectionLimit: 10,
 	user: process.env.CRAWLER_DB_USERNAME,
 	host: process.env.CRAWLER_DB_HOST,
 	database: process.env.CRAWLER_DB_DATABASE,
@@ -19,7 +19,7 @@ const clusterConfig = {
 };
 
 const cluster = mysql.createPoolCluster(clusterConfig);
-[...Array(15)].forEach(() => cluster.add(poolConfig));
+[...Array(10)].forEach(() => cluster.add(poolConfig));
 
 const getConnection = util.promisify(cluster.getConnection).bind(cluster);
 
@@ -28,7 +28,6 @@ module.exports = {
 		try {
 			const connection = await getConnection('*');
 			const query = util.promisify(connection.query).bind(connection);
-
 			const results = await query(sql, values);
 
 			connection.release();
