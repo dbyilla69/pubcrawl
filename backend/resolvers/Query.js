@@ -96,7 +96,10 @@ module.exports = {
 				'SELECT * FROM trc.videos WHERE publisher_id = ? AND id = ?',
 				[args.publisher_id, args.video_id],
 			);
-			if (video) video.publisher = args.publisher_name;
+
+			if (video) {
+				video.publisher = args.publisher_name;
+			}
 
 			return video;
 		} catch (error) {
