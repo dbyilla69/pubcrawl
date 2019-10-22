@@ -6,7 +6,11 @@ export default ({ Cell, video }) => {
 		if (a === 'channelsData' || a === 'metaData') {
 			return 1;
 		}
-		return -1;
+		if (b === 'channelsData' || b === 'metaData') {
+			return -1;
+		}
+
+		return a < b;
 	});
 
 	return sortedKeys.map((property) => {
