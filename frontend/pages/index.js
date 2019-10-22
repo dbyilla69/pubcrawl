@@ -43,8 +43,8 @@ export default () => {
 
 			setPubs(resp.data.allPublishers);
 			setLoading(false);
-		} catch (e) {
-			setError(e);
+		} catch (err) {
+			setError(err);
 			setLoading(false);
 		}
 	}, 200);
@@ -63,7 +63,7 @@ export default () => {
 						/>
 						{error && <Error error={error} />}
 						{loading && <Loading />}
-						{!loading && !initialLoad && !pubs.length ? <NoResults /> : null}
+						{!loading && !initialLoad && !error && !pubs.length ? <NoResults /> : null}
 						{!loading && <PubList pubs={pubs} />}
 					</>
 				)}
