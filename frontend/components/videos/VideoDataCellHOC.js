@@ -8,8 +8,13 @@ const LinkStyles = styled.a`
 const isUrl = (string) => {
 	try {
 		// eslint-disable-next-line no-new
-		new URL(string);
-		return true;
+		const url = new URL(string);
+
+		if (['https:', 'http:'].includes(url.protocol)) {
+			return true;
+		}
+
+		return false;
 	} catch (error) {
 		return false;
 	}
