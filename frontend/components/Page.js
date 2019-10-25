@@ -20,7 +20,7 @@ const StyledPage = styled.div`
   color: ${(props) => props.theme.black};
 `;
 
-const Inner = styled.div`
+const Inner = styled.main`
   max-width: ${(props) => props.theme.maxWidth};
   margin: 0 auto;
   padding: 2rem;
