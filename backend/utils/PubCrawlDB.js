@@ -1,4 +1,5 @@
 const db = require('../db/index');
+const writerDB = require('../db/writer');
 const { perPage } = require('../config.js');
 
 module.exports = {
@@ -176,7 +177,7 @@ module.exports = {
 
 	async recrawl(pubName, pubItemId) {
 		try {
-			const success = await db.query(
+			const success = await writerDB.query(
 				`UPDATE crawler.instructions
 				SET instructions.next_crawl=now(), instructions.video_status=1
 				WHERE publisher = ? and pub_item_id = ?;`,
