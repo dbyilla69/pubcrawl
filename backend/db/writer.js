@@ -5,9 +5,9 @@ const util = require('util');
 const poolConfig = {
 	connectionLimit: 10,
 	user: process.env.CRAWLER_DB_WRITER_USERNAME,
-	host: process.env.CRAWLER_DB_WRITER_HOST,
+	host: process.env.CRAWLER_DB_HOST,
 	database: process.env.CRAWLER_DB_DATABASE,
-	password: process.env.CRAWLER_DB_PASSWORD,
+	password: process.env.CRAWLER_DB_WRITER_PASSWORD,
 	port: process.env.CRAWLER_DB_PORT,
 	supportBigNumbers: true,
 };
