@@ -25,7 +25,7 @@ export default ({ video, idx }) => {
 			<button type="button" onClick={() => recrawl()} disabled={loading}>
 					Recrawl &#8635;
 			</button>
-			{ error && <span>{error.message}</span>}
+			{ error && <span>There was an issue connecting to the database. Try again.</span>}
 			{ loading && (
 				<>
 					<span className="recrawl-message">Recrawling</span>
