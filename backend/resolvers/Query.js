@@ -36,6 +36,39 @@ module.exports = {
 		}
 	},
 
+	allNetworks: async (parent, args, ctx, info) => {
+		try {
+			if (args.id) {
+				const res = await ctx.db.query('SELECT * FROM trc.publishers WHERE type = "NETWORK" and id = ?', [
+					args.id,
+				]);
+				return res;
+			}
+
+			if (args.name) {
+				const res = await ctx.db.query(
+					'SELECT * from trc.publishers WHERE type = "NETWORK" and name RLIKE ? LIMIT 100',
+					[args.name],
+				);
+				return res;
+			}
+
+			if (args.description) {
+				const res = await ctx.db.query(
+					'SELECT * from trc.publishers WHERE type = "NETWORK" and LOWER(description) RLIKE ? LIMIT 100',
+					[args.description.toLowerCase()],
+				);
+				return res;
+			}
+
+			return await ctx.db.query(
+				'SELECT * FROM trc.publishers where type = "NETWORK" ORDER BY id DESC LIMIT 100',
+			);
+		} catch (error) {
+			return error;
+		}
+	},
+
 	publisherWhereId: async (parent, args, ctx, info) => {
 		try {
 			const [publisher] = await ctx.db.query(

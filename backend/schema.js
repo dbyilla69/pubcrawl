@@ -3,6 +3,7 @@ const { gql } = require('apollo-server');
 module.exports = gql`
 	type Query {
 		allPublishers(id: ID, name: String, description: String): [Publisher]!
+		allNetworks(id: ID, name: String, description: String): [Publisher]!
 		publisherWhereId(id: ID): Publisher
 		publisherConfig(id: ID): [PublisherConfig]!
 		allVideos(

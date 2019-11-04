@@ -1,6 +1,11 @@
 {
 	"name": "pubcrawl-server",
 	"author": "mark sauer-utley",
+	"description": "GraphQL server for the Taboola Pub Crawl tool.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mrkutly/pubcrawl"
+	},
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
