@@ -5,28 +5,28 @@ import VideoData from './VideoData';
 import RECRAWL_MUTATION from '../../lib/mutations';
 
 export default ({ video, idx }) => {
-	const [recrawl, { error, loading }] = useMutation(
-		RECRAWL_MUTATION,
-		{
-			variables: video.recrawlData,
-			onError: () => {},
-
-		},
-	);
+	const [recrawl, { error, loading }] = useMutation(RECRAWL_MUTATION, {
+		variables: video.recrawlData,
+		onError: () => {},
+	});
 
 	const isEven = idx % 2 === 0;
 	const Cell = makeCellComponent();
 
 	return (
 		<VideoResult
-			key={Math.floor(Math.random() * 1000000)}
+			key={JSON.stringify(video)}
 			className={isEven ? 'even' : 'odd'}
 		>
 			<button type="button" onClick={() => recrawl()} disabled={loading}>
-					Recrawl &#8635;
+				Recrawl &#8635;
 			</button>
-			{ error && <span>There was an issue connecting to the database. Try again.</span>}
-			{ loading && (
+			{error && (
+				<span>
+					There was an issue connecting to the database. Try again.
+				</span>
+			)}
+			{loading && (
 				<>
 					<span className="recrawl-message">Recrawling</span>
 					<div className="spinner">
@@ -89,7 +89,7 @@ const VideoResult = styled.div`
 			cursor: initial;
 		}
 	}
-	
+
 	.recrawl-message {
 		font-weight: 600;
 		font-size: 1.6rem;
@@ -123,17 +123,26 @@ const VideoResult = styled.div`
 	}
 
 	@-webkit-keyframes sk-bouncedelay {
-		0%, 80%, 100% { -webkit-transform: scale(0) }
-		40% { -webkit-transform: scale(1.0) }
+		0%,
+		80%,
+		100% {
+			-webkit-transform: scale(0);
+		}
+		40% {
+			-webkit-transform: scale(1);
+		}
 	}
 
 	@keyframes sk-bouncedelay {
-		0%, 80%, 100% { 
+		0%,
+		80%,
+		100% {
 			-webkit-transform: scale(0);
 			transform: scale(0);
-		} 40% { 
-			-webkit-transform: scale(1.0);
-			transform: scale(1.0);
+		}
+		40% {
+			-webkit-transform: scale(1);
+			transform: scale(1);
 		}
 	}
 `;

@@ -17,20 +17,43 @@ export default ({ Cell, video }) => {
 		if (property === 'recrawlData') return null;
 
 		if (property === 'metaData') {
-			return <MetaData metaData={video.metaData} Cell={Cell} />;
+			return (
+				<MetaData
+					metaData={video.metaData}
+					Cell={Cell}
+					key={`${video[property]}-${property}`}
+				/>
+			);
 		}
 
-		if (['crawlerAuditData', 'crawlerInstructionsData'].includes(property)) {
-			return Object.keys(video[property])
-				.map((nestedProp) => (
-					<Cell key={`${nestedProp}-${video[property][nestedProp]}`} displayKey={nestedProp} value={video[property][nestedProp]} />
-				));
+		if (
+			['crawlerAuditData', 'crawlerInstructionsData'].includes(property)
+		) {
+			return Object.keys(video[property]).map((nestedProp) => (
+				<Cell
+					key={`${nestedProp}-${video[property][nestedProp]}`}
+					displayKey={nestedProp}
+					value={video[property][nestedProp]}
+				/>
+			));
 		}
 
 		if (property === 'channelsData') {
-			return <ChannelsData channelsData={video.channelsData} Cell={Cell} />;
+			return (
+				<ChannelsData
+					channelsData={video.channelsData}
+					Cell={Cell}
+					key={`${video[property]}-${property}`}
+				/>
+			);
 		}
 
-		return <Cell key={`${property}-${video[property]}`} displayKey={property} value={video[property]} />;
+		return (
+			<Cell
+				key={`${property}-${video[property]}`}
+				displayKey={property}
+				value={video[property]}
+			/>
+		);
 	});
 };

@@ -3,6 +3,11 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
+	"description": "Client for the Taboola Pub Crawl tool.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mrkutly/pubcrawl"
+	},
 	"scripts": {
 		"dev": "next -p 7777",
 		"build": "next build",

@@ -4,41 +4,24 @@ module.exports = {
 		es6: true,
 		node: true,
 	},
-	extends: [
-		'airbnb',
-	],
+	extends: ['airbnb'],
 	globals: {
-		Atomics:
-			'readonly',
-		SharedArrayBuffer:
-			'readonly',
+		Atomics: 'readonly',
+		SharedArrayBuffer: 'readonly',
 	},
-	parser:
-		'babel-eslint',
+	parser: 'babel-eslint',
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
 		},
 		ecmaVersion: 2018,
-		sourceType:
-			'module',
+		sourceType: 'module',
 	},
-	plugins: [
-		'react',
-	],
+	plugins: ['react'],
 	rules: {
-		indent: [
-			'error',
-			'tab',
-		],
-		'react/jsx-indent': [
-			'error',
-			'tab',
-		],
-		'react/jsx-indent-props': [
-			'error',
-			'tab',
-		],
+		indent: ['error', 'tab'],
+		'react/jsx-indent': ['error', 'tab'],
+		'react/jsx-indent-props': ['error', 'tab'],
 		'react/display-name': 0,
 		'no-tabs': 0,
 		'func-names': 0,
@@ -50,8 +33,7 @@ module.exports = {
 			1,
 			{
 				ignoreSiblings: true,
-				argsIgnorePattern:
-					'res|next|^err',
+				argsIgnorePattern: 'res|next|^err',
 			},
 		],
 		'react/jsx-one-expression-per-line': 0,
@@ -64,10 +46,7 @@ module.exports = {
 		'react/jsx-filename-extension': [
 			1,
 			{
-				extensions: [
-					'.js',
-					'.jsx',
-				],
+				extensions: ['.js', '.jsx'],
 			},
 		],
 		'max-len': [

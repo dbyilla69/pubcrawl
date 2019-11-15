@@ -1,6 +1,7 @@
 {
 	"workbench.colorCustomizations": {
 		"activityBar.background": "#1accff",
+		"activityBar.activeBorder": "#df00ad",
 		"activityBar.foreground": "#15202b",
 		"activityBar.inactiveForeground": "#15202b99",
 		"activityBarBadge.background": "#df00ad",
@@ -17,5 +18,6 @@
 	"prettier.useTabs": true,
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
-	"prettier.tabWidth": 4
+	"prettier.tabWidth": 4,
+	"prettier.arrowParens": "always"
 }

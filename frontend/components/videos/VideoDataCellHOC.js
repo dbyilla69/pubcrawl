@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 const LinkStyles = styled.a`
 	color: ${(props) => props.theme.darkblue};
 `;
@@ -32,7 +31,15 @@ const makeCellComponent = () => {
 			case isUrl(value): {
 				const stringVal = value.toString();
 
-				return <LinkStyles href={stringVal} target="_blank" rel="noopener noreferrer">{stringVal}</LinkStyles>;
+				return (
+					<LinkStyles
+						href={stringVal}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{stringVal}
+					</LinkStyles>
+				);
 			}
 			case !!value: {
 				return value.toString();

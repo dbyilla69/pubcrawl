@@ -3,7 +3,10 @@
 // ? 2. take in the level at which it is filtering (ex. 'crawlerAuditData')
 // ? 3. iterates over the filters entries and creates a new object with only the desired data
 
-const makeVideoReducer = (data) => (level) => (videoData, [property, active]) => {
+const makeVideoReducer = (data) => (level) => (
+	videoData,
+	[property, active],
+) => {
 	if (level) {
 		if (active) {
 			if (data[level]) {
@@ -42,10 +45,12 @@ export const applyFilters = ({ video, filters }) => {
 		crawlerInstructionsFilters,
 	).reduce(makeVideoReducer(video)('crawlerInstructionsData'), {});
 
-	const channelsData = video.channelsData
-		.map((videoChannel) => Object.entries(channelsFilters).reduce(makeVideoReducer(videoChannel)(), {}));
+	const channelsData = video.channelsData.map((videoChannel) => Object.entries(channelsFilters).reduce(
+			makeVideoReducer(videoChannel)(),
+			{},
+		),);
 
-	const metaData = filters.metaData ? video.metaData : null;
+	const metaData = filters.metaData ? video.metaData : [];
 
 	const filteredVideo = {
 		channelsData,
