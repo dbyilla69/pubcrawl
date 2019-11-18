@@ -17,15 +17,18 @@ export default (props) => {
 
 	const {
 		data, error, loading, refetch, networkStatus,
-	} = useQuery(ALL_VIDEOS_QUERY, {
-		variables: {
-			publisher_id: parseInt(id, 10),
-			publisher_name: name,
-			recommendable_filter: recommendableFilter,
-			page: props.page || 1,
+	} = useQuery(
+		ALL_VIDEOS_QUERY,
+		{
+			variables: {
+				publisher_id: parseInt(id, 10),
+				publisher_name: name,
+				recommendable_filter: recommendableFilter,
+				page: props.page || 1,
+			},
+			notifyOnNetworkStatusChange: true,
 		},
-		notifyOnNetworkStatusChange: true,
-	});
+	);
 
 	const paginationData = data && data.allVideos.pageInfo;
 
@@ -37,10 +40,9 @@ export default (props) => {
 
 		if (noResults) return <NoResults />;
 
-		const mappedVideoData = data.allVideos.edges.map((video) => applyFilters({ video, filters }));
-		return <Videos videos={mappedVideoData} />;
+		const filteredVideos = data.allVideos.edges.map((video) => applyFilters({ video, filters }));
+		return <Videos videos={filteredVideos} />;
 	};
-
 
 	return (
 		<Layout>
@@ -52,28 +54,32 @@ export default (props) => {
 				disabledFields={[]}
 			/>
 			<div style={{ minHeight: '80vh', position: 'relative' }}>
-				{
-					paginationData
-					&& (
-						<TopContainer>
-							<div style={{ minWidth: '800px' }}>
-								<Pagination paginationData={paginationData} loading={loading} page={props.page} />
-							</div>
-							<button
-								id="refresh-button"
-								type="button"
-								onClick={() => refetch()}
-							>
-									Refresh Results &#8635;
-							</button>
-						</TopContainer>
-					)
-				}
-				{ statusSwitch() }
-				{
-					paginationData
-					&& <Pagination paginationData={paginationData} loading={loading} page={props.page} />
-				}
+				{paginationData && (
+					<TopContainer>
+						<div style={{ minWidth: '800px' }}>
+							<Pagination
+								paginationData={paginationData}
+								loading={loading}
+								page={props.page}
+							/>
+						</div>
+						<button
+							id="refresh-button"
+							type="button"
+							onClick={() => refetch()}
+						>
+							Refresh Results &#8635;
+						</button>
+					</TopContainer>
+				)}
+				{statusSwitch()}
+				{paginationData && (
+					<Pagination
+						paginationData={paginationData}
+						loading={loading}
+						page={props.page}
+					/>
+				)}
 			</div>
 		</Layout>
 	);
