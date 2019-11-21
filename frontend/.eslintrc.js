@@ -3,6 +3,8 @@ module.exports = {
 		browser: true,
 		es6: true,
 		node: true,
+		jest: true,
+		"cypress/globals": true
 	},
 	extends: ['airbnb'],
 	globals: {
@@ -17,7 +19,7 @@ module.exports = {
 		ecmaVersion: 2018,
 		sourceType: 'module',
 	},
-	plugins: ['react'],
+	plugins: ['react', 'cypress'],
 	rules: {
 		indent: ['error', 'tab'],
 		'react/jsx-indent': ['error', 'tab'],
