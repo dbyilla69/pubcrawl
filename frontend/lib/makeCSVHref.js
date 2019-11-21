@@ -45,22 +45,26 @@ function getMetaDataHeaders(videos) {
 }
 
 function getChannelHeaders(videos) {
-	const channelCounts = videos.map((video) => video.channelsData.length);
-	const maxChannelCount = Math.max(...channelCounts);
 	const videoWithChannels = videos.find(
 		(video) => video.channelsData.length > 0,
 	);
-	const channelKeys = Object.keys(videoWithChannels.channelsData[0]);
-	const channelHeaders = Array(maxChannelCount)
-		.fill(1)
-		.reduce((headers, _, idx) => {
-			const newHeaders = channelKeys.map(
-				(key) => `channel ${idx + 1} - ${key}`,
-			);
+	if (videoWithChannels) {
+		const channelCounts = videos.map((video) => video.channelsData.length);
+		const maxChannelCount = Math.max(...channelCounts);
+		const channelKeys = Object.keys(videoWithChannels.channelsData[0]);
+		const channelHeaders = Array(maxChannelCount)
+			.fill(1)
+			.reduce((headers, _, idx) => {
+				const newHeaders = channelKeys.map(
+					(key) => `channel ${idx + 1} - ${key}`,
+				);
 
-			return [...headers, ...newHeaders];
-		}, []);
-	return channelHeaders;
+				return [...headers, ...newHeaders];
+			}, []);
+		return channelHeaders;
+	}
+
+	return [];
 }
 
 function makeHeaders(videos) {
