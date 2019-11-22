@@ -7,7 +7,7 @@ import RECRAWL_MUTATION from '../../lib/mutations';
 export default ({ video, idx }) => {
 	const [recrawl, { error, loading }] = useMutation(RECRAWL_MUTATION, {
 		variables: video.recrawlData,
-		onError: () => {},
+		onError: () => { },
 	});
 
 	const isEven = idx % 2 === 0;

@@ -28,7 +28,8 @@ export default () => {
 	const onChange = debounce(async (e, client) => {
 		try {
 			setError(null);
-			if (e.target.value.length < 3) return setPubs([]);
+			const searchTerm = e.target.value.trim();
+			if (searchTerm.length < 3) return setPubs([]);
 
 			setLoading(true);
 
@@ -38,7 +39,7 @@ export default () => {
 
 			const resp = await client.query({
 				query: ALL_PUBLISHERS_QUERY,
-				variables: { [searchType]: e.target.value },
+				variables: { [searchType]: searchTerm },
 			});
 
 			setPubs(resp.data.allPublishers);

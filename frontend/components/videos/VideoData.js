@@ -14,6 +14,7 @@ export default ({ Cell, video }) => {
 	});
 
 	return sortedKeys.map((property) => {
+
 		if (property === 'recrawlData') return null;
 
 		if (property === 'metaData') {

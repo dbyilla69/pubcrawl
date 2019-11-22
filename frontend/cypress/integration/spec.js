@@ -1,6 +1,7 @@
 describe('Search Page', () => {
 	it('renders without crashing', () => {
 		cy.visit('/');
+		cy.contains('Pub Crawler');
 	});
 
 	it('searches for publishers by name', () => {

@@ -14,7 +14,7 @@ export default () => {
 	const handleSubmit = (e, searchType) => {
 		e.preventDefault();
 		const { id, name } = router.query;
-		const searchQuery = search[searchType];
+		const searchQuery = search[searchType].trim();
 		router.push({
 			pathname: '/videos/search',
 			query: {

@@ -13,7 +13,7 @@ export default (props) => {
 	const { id, name } = props.publisher;
 	const { searchQuery, searchType } = props;
 	const [filters, setFilters] = useState(defaultFilters);
-	const query =		searchType === 'video_url' ? VIDEOS_WHERE_URL_QUERY : VIDEO_WHERE_ID_QUERY;
+	const query = searchType === 'video_url' ? VIDEOS_WHERE_URL_QUERY : VIDEO_WHERE_ID_QUERY;
 
 	const { data, error, loading } = useQuery(query, {
 		variables: {
@@ -44,11 +44,13 @@ export default (props) => {
 			<Filters
 				filters={filters}
 				setFilters={setFilters}
-				setRecommendableFilter={() => {}}
-				recommendableFilter={() => {}}
+				setRecommendableFilter={() => { }}
+				recommendableFilter={() => { }}
 				disabledFields={['recommendable']}
 			/>
-			{statusSwitch()}
+			<div style={{ minHeight: '80vh', position: 'relative' }}>
+				{statusSwitch()}
+			</div>
 		</Layout>
 	);
 };
